@@ -1,0 +1,245 @@
+Key,Description,Translation
+exit-door,выход на двери помещения,Exit
+exit-menu,выход из меню,Exit
+ticket-buy-button,кнопка покупки билета,Buy a ticket
+ticket-bought,"сообщение о том, что билет куплен",Ticket purchased
+cancel-button,кнопка отмены,Cancel
+confirm-button,Кнопка подтверждения действия,Confirm
+system-bundle-version,Версия сборки приложения,Bundle version:
+apartments-menu,Меню помещений,Spaces
+apartment-common-button,Пункт меню Общие помещения,Common
+apartment-personal-button,Пункт меню Мои помещения,My
+invoices-button,Пункт меню Приглашения,Invites
+system-company,Название компании,Company:
+enter-button,Пункт меню авторизации,Authorize
+login-exit-button,Кнопка выхода из аккаунта,Logout
+greetings-message,Сообщение приветствия пользователя,"Hello,"
+language-button,Кнопка указания языка,Language
+login-password-placeholder,Подсказка поля ввода пароля,Enter password
+login-placeholder,Подсказка поля ввода логина,Enter login
+loginoremail-placeholder,Подсказка поля ввода логина или почты,Enter login or email
+system-product,Название приложения,App name:
+user-profile,Имя профиля пользователя,Name:
+language-english,Кнопка выбора английского языка,English
+language-russian,Кнопка выбора русского языка,Русский
+password-reset-button,Кнопка восстановления пароля,Password recovery
+registration-button,Кнопка регистрации в системе,Registration
+login-enter-button,Кнопка входа в аккаунт,Enter
+connect-button,Кнопка переподключения,Connect
+connection-problem-message,Сообщение о проблеме подключения,"Connection problem detected.
+Check your internet connection and try again"
+authorization-menu,Меню авторизации,Authorization
+profile-menu,Меню настроек профиля пользователя,Profile
+avatar-button,Пункт меню выбора аватара,Avatar
+user-button,Пункт меню пользователя,User
+version-button,Пункт меню версии,Version
+system-version,Версия программы,Version:
+apartment-availability,Уровень доступа помещения,Room availability:
+apartment-change-image,Заменить изображение на двери,Change image:
+apartment-personal-list,Список моих помещений,My spaces:
+wallet-balance,Баланс средств на кошельке,Balance:
+apartment-personal-images,Список изображений в личном помещении,My images:
+move-back-button,Кнопка Назад,Return
+personal-items-list,Список личных предметов,My items
+personal-items-collect-button,Кнопка сбора всех личных предметов,Collect all items
+personal-items-wine-button,Кнопка генерации предмета Вино,Wine
+personal-items-hookah-button,Кнопка генерации предмета Кальян,Hookah
+personal-items-camera-button,Кнопка генерации предмета Камера,Camera
+personal-items-twrcoin-button,Кнопка генерации предмета TWR,TWR coin
+personal-items-pad-button,Кнопка генерации предмета Планшет,Pad
+personal-items-mirror-button,Кнопка генерации предмета Зеркало,Mirror
+visitors-karma,Значение кармы посетителя,Karma
+visitors-location,Местонахождение посетителя,Location
+visitors-status,Статус локации,Status
+visitors-name,Имя посетителя,Name
+visitors-users,Пользователи в помещении,Users
+visitors-owner,Владелец помещения,Owner
+zone-monitor-connection-error,Ошибка соединения на мониторе холла,Server connection error
+visitors-panel,Панель Посетители,Visitors
+statistics-panel,Панель Статистика,Statistics
+events-panel,Панель События,Events
+locations-panel,Панель Локации,Locations
+total-users-count,Общее количество пользователей,Total user count: {0}
+found-users-count,Количество найденных пользователей,Users found: {0}
+delete-button,Кнопка удаления,Delete
+blackboard-delete-confirm-message,Подтверждение удаления доски,Are you sure you want to delete the entire contents of the board without saving it?
+yes-button,Кнопка Да,Yes
+no-button,Кнопка Нет,No
+blackboard-saved-message,Сообщение о сохранении доски,The board image is saved in the device memory: {0}
+loading-message,Сообщение о загрузке,Loading...
+apartments-lobby,Помещение Лобби,Lobby
+apartments-lecture-hall,Помещение Лекторий,Lecture hall
+apartments-meeting-room,Помещение Переговорная,Meeting room
+apartments-standup,Помещение Стендап,Standup
+apartments-cinema,Помещение Кинотеатр,Cinema
+apartments-showroom,Помещение Магазин,Showroom
+apartments-gallery,Помещение Галерея,Gallery
+robot-hello-message,Приветствие робота,Hello! Should I escort you to the entrance to the Meta Sense conference?
+robot-escort-message,Робот сопровождает к двери помещения,Press the joystick forward to follow me
+robot-destination-reached-message,Робот достиг двери помещения,This is the entrance to the Meta Sense conference. Point the pointer at the door and press the joystick forward
+access-type-public,Уровень доступа Публичный,For everyone and everytime
+access-type-live,Уровень доступа При наличии владельца,For everyone when I'm inside
+access-type-private,Уровень доступа Приватный,Just for me
+apartment-image-label-door,Текст при отсутствующей картинки двери,place on door
+apartment-image-label-wall,Текст при отсутствующей картинки на стене,place on wall
+access-message-opened,Помещение открыто,Opened
+access-message-closed,Помещение закрыто,Closed
+access-message-owner-inside,Владелец помещения находится внутри,The owner is inside
+access-message-owner-absent,Владелец помещения отсутствует,The owner is absent
+event-entrance-by-tickets,Режим доступа на мероприятие,Entrance: by tickets
+event-entrance-free,Режим доступа на мероприятие,Entrance: free
+event-tickets-available-count,Доступное количество билетов,available {0} of {1}
+event-not-started-message,"Сообщение, что указанное мероприятие не началось",The event has not started yet
+event-access-admin,Сообщение о возможности входа на мероприятие,"You are the administrator of the space, you can enter."
+event-access-user-with-ticket,Сообщение о возможности входа на мероприятие,"You have a ticket, you can enter."
+event-access-user-without-ticket,Сообщение о возможности входа на мероприятие,You don't have a ticket.
+event-access-buy-question,"Вопрос, хочет ли пользователь приобрести билет",Get it?
+day-today,,Today
+returning-start-scene-message,,Returning to the starting scene.
+error-message-scene-default,,You are returning to the starting scene.
+error-message-network-default,,Connection failed.
+error-message-owner-absence,,Staying in this space without the owner is limited.
+error-message-private-space,,Stay in this space is restricted by the owner.
+error-message-event-no-ticket,,You do not have an event ticket. Check back later.
+error-message-double-client,,Disconnecting. Simultaneous login of several users under one account.
+error-message-wrong-token,,Authorization error: user with such data was not found. Check your account information or contact administrator.
+error-message-not-authorized,,The user is not authorized.
+error-message-event-private,,A private event is now being held in this space. Buy a ticket.
+error-message-old-app-version,,"Your version is out of date!
+Update to bundle version: {0}"
+error-message-authorization-failed,,Authorization failed
+enter-password-message-wrong,,The password is wrong
+password-recovery,Стартовое меню восстановление пароля,Restore your password through your personal account on the website: https://sensetower.io/
+enter-password-message-correct,,The password is correct
+zone-expanding-message,,Scene resizing in progress
+loading-scene-message,,Loading scene {0}...<br> Please stand by
+zone-menu-participants,,Participants
+zone-menu-size,,Size
+zone-size-meeting-small,,Small meeting room
+zone-size-meeting-big,,Large meeting room
+zone-menu-mute,меню зоны левая панель,Mute
+zone-menu-lock,меню зоны левая панель,Lock
+admin-label,меню зоны префаб пользователя,admin
+me-label,меню зоны префаб пользователя,me
+zone-name,меню зоны левая панель,Zone name
+zone-visitors,меню зоны правая панель,Visitors
+main-browser-translation-in-progress,Надпись Идет трансляция,Streaming in progress
+watch-button,Кнопка вводного меню,Watch
+system-ContourType-version,Тип контура,ContourType:
+shopzone-buy-zone,название зоны покупки,Buy zone
+shopzone-sell-zone,название зонны продажи,Sell zone
+shopzone-put-your-object,команда положить свой товар,put product to sell
+shopzone-put-shop-object,команда положить объект магазина,put product to buy
+shopzone-put,слово товар,put
+shopzone-buy-stand,цена покупки,on stand to buy
+shopzone-take-to-sell,цена продажи,take coin to sell product for
+watch-warning,нельзя выбрать часы,Please note that it is not possible to display a wristwatch for the avatar you have chosen
+apartment-visitors,Список посетителей помещения пользователя,Visitors:
+apartment-admins,Список админов помещения пользователя,Administrators:
+apartment-blacklist,Список заблокированных пользователей помещения,Blacklist:
+login-guestenter-button,Кнопка входа в аккаунт,Guest Enter
+registration-ten-minutes,Уведомление после 10 минут гостевого пребыванния,"You have been staying as a guest in the app for 10 minutes and earned 10 TWR. To save your accumulated savings, we advise you to register in the application"
+login-email-placeholder,Подсказка поля ввода email,Enter email
+login-password-confirmation-placeholder,Подсказка поля ввода повторного пароля,Confirm password
+guest-info-text,Подсказка на вводной сцене для гостя,"After logging in as a guest, you can not register by entering your email and password. When you log in as a guest, you will receive accelerated accumulation of internal currency, but at the same time you will have a limit of accumulation of internal currency (50 TWR), you will not be able to transfer internal currency to other users, change your avatar or choose a name for your account. All these functions are available only if you register in the application"
+guest-logout-warning,Текст модального окна при выходе гостя из аккаунта,Are you sure you want to log out of your guest account?<br>This will result in the loss of your accumulated TWR.
+guest-quit-warning,Текст модального окна при выходе гостя из приложения,Are you sure you want to quit the application?<br>You may lose your account with the TWR you have accumulated.
+quit-app-button,Кнопка выхода из приложения,Quit
+recommendation-register-info-text,Текст гостю для регистрации,"In order to get the role of a resident of the application and additional features in the application, we recommend that you register."
+repeat-password-button,Кнопка повторите пароль,Repeat password
+enter-email-button,Кнопка введите email,Enter email
+empty-input-field-error,Ошибка пустых полей,Not all fields are filled
+password-no-equals-error,Ошибка пустых полей,Password mismatch
+notifiaction-ready-to-restart,Уведомление о перезагрузке сцены,The data has been sent. The space will be reloaded now
+notification-authorisation-error,Уведомление об ошибке авторизации,"An authorization error has occurred, please contact the administrator"
+notification-successfull-registration,Уведомление об успешной регистрации,Congratulations! You are a registered user!
+50twr-end-maining-text,Уведомление об окончании майнинг после 50 TWR,"You stayed as a guest in the app for 50 minutes and earned 50 TWR. As a guest, you can no longer receive TWR. To save the already received TWR and the opportunity to receive new ones, we advise you to register in the application"
+twr-earned-guest,Текущее число ТВР заработанных гостем,"You have earned {0} TWR during your stay in the app. To save the already received TWR and the opportunity to receive new ones, we advise you to register in the application"
+apartment-no-admins,Сообщение при пустом списке админов пространства,You haven't assigned any administrators to this space yet
+input-username-placeholder,Плейсхолдер в поле ввода имени пользователя,Enter user login
+button-add,Кнопка Добавить,Add
+apartment-no-blacklist,Сообщение при пустом черном списке пространства,You haven't added anyone to the blacklist yet
+empty-name-error,Вы не ввели имя,You didn't enter a name
+fail-name,Заполните корректно поле имени,Fill in the name field correctly
+email-fail,Вы не ввели email,You have not entered an email
+phone-number-fail,Вы ввели некорректный номер телефона,You entered an invalid phone number
+fail-server-connect,"Ошибка связи, попробуйте отправить заявку позже","Communication error, please try again later"
+manager-call-soon,Ваша заявка отправлена менеджеру и в ближайшее время он с Вами свяжется,Your application has been sent to the manager and he will contact you shortly
+close-button,Закрыть,Exit
+red-required-fields,Поля обязательные для заполнения,"<color=""red"">*</color>Required fields"
+red-enter-email,Введите email,"Enter email<color=""red"">*"
+red-enter-name,Введите имя,"Enter Login<color=""red"">*"
+enter-phone-number,Введите номер телефона,Enter phone number
+enter-comments,Введите комментарий,Enter a comment
+fill-all-input-field,Заполните свои данные в форме заявки,Fill out your details in the application form and our manager will contact you and tell you how you can get ownership of the premises
+send-request,Отправить заявку,Submit an application
+want-space,Хочу помещение,I WANT A ROOM
+red-enter-phone-number,Введите номер телефона,"Enter phone number<color=""red"">*</color>"
+tips-default-message,Дефолтный текст панели подсказок,Point the beam from your right hand at any interactive object and a brief hint about how it works will appear in this window
+cursor-tips-default-message,Дефолтный текст панели подсказок для windows пользователей,Point the cursor at any interacting object and a brief hint about how it works will appear in this window
+wallet-transactions-tab,Вкладка Транзакции,Transactions
+wallet-purchases-tab,Вкладка Покупки,Purchases
+wallet-transactions-buy-sell-tab,Вкладка в панели транзакций,Purchase/Sale
+wallet-transactions-transfer-tab,Вкладка в панели транзакций,Transfers
+wallet-transactions-mining-burning-tab,Вкладка в панели транзакций,Mining/Burning
+wallet-transactions-space-entry-tab,Вкладка в панели транзакций,Entering Spaces
+friends-list,Панель меню Мои друзья,My friends
+friends-list-empty,"Сообщение, если список друзей пуст","At the moment, the list of users added as friends is empty.
+To add a user to your friends list, you need to make your avatars touch (a handshake, a 'high five'), and then confirm the friendship in this window."
+friends-list-delete-confirm-message,Подтверждение удаления друга,Remove from friends?
+friends-confirmation-waiting,Ожидание подтверждения добавления в друзья,Waiting for confirmation from another user
+mafia-admin,кнопки меню ведущего,Set admin
+mafia-kick,кнопки меню ведущего,Kick
+mafia-game,игра,Game
+mafia7,,7 places
+mafia14,,14 places
+mafia21,,21 places
+mafia-start,,Start game
+mafia-next,,Finish level
+mafia-finish,,Finish game
+mafia-win-mafia,,Mafia win!
+mafia-win-citizens,,Citizens win!
+mafia-settings,,Settings
+mafia-presets,,Roles presets
+mafia-presets-info,,Set up the number of players for each role
+mafia-presets-error,,The number of roles does not match. {1} of the {2} necessary ones have been selected
+mafia-your-role,ночное меню,Your role:
+mafia-advice,ночное меню,Do you know that {0} does {1}?
+mafia-your-role-description,ночное меню,Your role description:
+mafia-game-status,ночное меню,Current game status:
+mafia-check-notmafia,ответ комиссару,not mafia
+mafia-check-mafia,ответ комиссару,mafia
+presented-coin,подарочная монета на стартовой сцене,"Catch coin by trigger, or push А button on right controller, to get 50 TWR!"
+presented-coin-win,подарочная монета на стартовой сцене для win-клиента,Click on the coin with the mouse to get 50 TWR!
+not-full-fledged-user-info,уведомление пользователю до 10 часов,Financial transactions are limited until the total time of your stay in the Sense Tower exceeds 10 hours
+full-fledged-notification,уведомление пользователю о 10 часах,Congratulations! The duration of your stay was more than 10 hours. Financial transactions are unblocked!
+win-buy-not-enough,если не хватает денег на покупку вин клиентом,You do not have enough {1}TWR to buy a {2}
+win-buy-request,вы собираетесь купить,Your balance is {1}TWR. <br>Are you going to buy a {2} for {3}TWR? 
+win-buy-complete,покупка состоялась,You bought a {1}. <br>Your account balance {2}TWR
+coin-error-when-buy,сообщение о нехватке средств,{1} TWR is not enough to buy {2}
+coin-error-default,сообщение об ошибке транзакции,Error. The transfer aborted
+coin-cant-give-that-user,сообщение когда нельзя передать неполноценному пользователю,Transfer to new users is not possible
+coin-cant-give-because-of-your-status,сообщение когда вы не можете передать поскольку непоноценный,Your financial transactions are still limited
+lift-menu-already-there,кнопка данного этажа,already here
+lift-menu-no-access,для закрытых этажей,no access
+lift-menu-balcony,название балкона,Balcony
+metarecord-wait-downloading,,Loading... Please wait
+metarecord-wait-saving,,Saving... Please wait
+metarecord-name,,Hologram recording and playback
+metarecord-instruction,,You can record movements and speech
+metarecord-record,,Record
+metarecord-stop,,Stop recording
+meterecord-play,,Play
+meterecord-norecords,,No records
+save-exit,,Save and exit
+player-sign-seller,,Sells goods in the marketplace
+player-sign-space1,,Owns the space
+player-sign-space3,,Owns three spaces
+player-sign-space4,,Owns four spaces
+player-sign-space5,,Owns a lot of spaces
+full-fledged-description,,New user
+camera-off,,Camera off
+camera-starting,,Camera ready
+camera-streaming,,Camera streaming
+camera-fail,,Camera error
+camera-stopping,,Camera stopping

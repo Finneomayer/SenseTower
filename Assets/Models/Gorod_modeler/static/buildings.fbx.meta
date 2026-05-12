@@ -1,0 +1,585 @@
+fileFormatVersion: 2
+guid: 63d01d1032480c04dab8699708a88f91
+ModelImporter:
+  serializedVersion: 21202
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1_SHOPS
+    second: {fileID: 2100000, guid: b086ace74a805e2489d01096c8e9bae3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1_beton
+    second: {fileID: 2100000, guid: a6db0c534e47042478098e571eb2b580, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1_fasad1
+    second: {fileID: 2100000, guid: 0819d7a03689ec54dadeb4e086cf8250, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1_fasad2
+    second: {fileID: 2100000, guid: cccc33f53c24b464996745cfc5be599c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1_fasad3
+    second: {fileID: 2100000, guid: 60e149e199512414491d7c950c204fc7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area1_trotuar
+    second: {fileID: 2100000, guid: 6e06f4ce4bdb8e549913bce801e9596b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Area5_fasad1
+    second: {fileID: 2100000, guid: c846b2684b8c743459695aa4490b3df4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_SHOPS
+    second: {fileID: 2100000, guid: 7b272bcd4807ec341b757c151327b84f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_beton
+    second: {fileID: 2100000, guid: 5695c9fb7b404a943838c39958fdae21, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_fasad1
+    second: {fileID: 2100000, guid: c9d80ca0fea9c4b47a0748e750dcd56b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_grey_tiles
+    second: {fileID: 2100000, guid: 294b64146cf6c5042ab85b144ccd9d86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_hirise
+    second: {fileID: 2100000, guid: 5baed9ed57ec12440af0bff3ae5057c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_residental
+    second: {fileID: 2100000, guid: 311d66efeaca90c4e9ec5978f15a35ca, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_roof1
+    second: {fileID: 2100000, guid: 2a938d4f5b178dc4e98341de8a20c2f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: House_area_2_trotuar
+    second: {fileID: 2100000, guid: b523924cf69ba0b459d640dc3e750547, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area1_fasad_high
+    second: {fileID: 2100000, guid: 47d6ff7aabbdc7e4aaa35af205d03ff9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area1_roof1
+    second: {fileID: 2100000, guid: c492280c661d8464baa38e7dbe9a5d87, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_SHOPS
+    second: {fileID: 2100000, guid: 125eb0e645846c84ba9d3a3e5eb92699, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_beton
+    second: {fileID: 2100000, guid: 32a25d6c5946ddb48b62c8ab544f9299, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_building1
+    second: {fileID: 2100000, guid: c4c5141bf13dc5842b87c35e7cd76bb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_fasad2
+    second: {fileID: 2100000, guid: 3e59409051bcce84fa407540cb00e659, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_fasad3
+    second: {fileID: 2100000, guid: 2f3c5a0218095c74b9b6d5cb0eb68698, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_fasad_high
+    second: {fileID: 2100000, guid: 7b0c9678c2cf4c04fbe1640f454cadbe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_hirise
+    second: {fileID: 2100000, guid: c40279f77176f6d4da3cb0eb67abfd1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_roof1
+    second: {fileID: 2100000, guid: bca53cd55ca23f34c87bca925947ea62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area5_trotuar
+    second: {fileID: 2100000, guid: dd54fc6b846444e4285ac16c6b0a34e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area6_SHOPS
+    second: {fileID: 2100000, guid: 62e0571ac1746a148b3006988d26d9a4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area6_beton.002
+    second: {fileID: 2100000, guid: f775a7f7cf15d6e4a9f17bc793af0d2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area6_highrise.001
+    second: {fileID: 2100000, guid: e350a26acb9ed07408abf337c9fda741, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area6_roof1.002
+    second: {fileID: 2100000, guid: b1e74c49c4dae084a929825ec938de30, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area6fasad2.001
+    second: {fileID: 2100000, guid: 4b5387d8e047a1642b57e701f6c8a82a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area6trotuar.001
+    second: {fileID: 2100000, guid: 23524f4d48fda1c4a8c24187a34b5956, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7SHOPS.002
+    second: {fileID: 2100000, guid: f88a99846a55e924cbcae6b59f755c16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7_beton.002
+    second: {fileID: 2100000, guid: 5dd14a60246d9b647931ab46ae1f801b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7_hirise1
+    second: {fileID: 2100000, guid: b9d95943a529c6846aa97eab98a0007e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7_hirise2
+    second: {fileID: 2100000, guid: 356ba67b9362ba84d8274adb0dd2ad86, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7_hirise3
+    second: {fileID: 2100000, guid: 5c067e39b5943c84f80e6b377feb91dc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7fasad2.001
+    second: {fileID: 2100000, guid: 9787736f0454dde45bd5490d014c45e6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area7roof1.002
+    second: {fileID: 2100000, guid: e62d54942a837e04dbad320e453eda8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_SHOPS
+    second: {fileID: 2100000, guid: 087615433a6874042ad52db423104154, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_beton
+    second: {fileID: 2100000, guid: 250861bffa95f344e9f1cf142e38f65a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_fasad4
+    second: {fileID: 2100000, guid: 661d0b16e3dc88e479c1461777c6fdf4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_hirise
+    second: {fileID: 2100000, guid: d7901bd6a66b90c499d07e62cf9dbcb0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_hirise_beton
+    second: {fileID: 2100000, guid: 2712597eb1bddf949b12d51d3f5f80a2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_roof1
+    second: {fileID: 2100000, guid: 0e7bc825be789854386378077df1666a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_4_trotuar
+    second: {fileID: 2100000, guid: 882c4e0760b1ef9448e530182e04b536, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_SHOPS.002
+    second: {fileID: 2100000, guid: 68952f956a9a5d54fb55c8e6b2234bec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_SHOPS.003
+    second: {fileID: 2100000, guid: 689e44907b617514685a2bfcd0628b49, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_area5_beton.003
+    second: {fileID: 2100000, guid: 8b2482a808d74034983c32463f8bd1fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_beton.002
+    second: {fileID: 2100000, guid: 7d14a949a74417945bf822f5b6a1680a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_fasad2.001
+    second: {fileID: 2100000, guid: 8e88a10efaa74be4581e3a3a8563b6d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_hirise1
+    second: {fileID: 2100000, guid: ac7356a183ae9704482448c4b592f71f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_hirise2
+    second: {fileID: 2100000, guid: 19855d22ff3f5974db9f7f2f5583c43a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_hirise3
+    second: {fileID: 2100000, guid: 193b6eea4922df1488eb8765551280c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_hirise5
+    second: {fileID: 2100000, guid: 3dceded3c40c10448b84ebf309c3afb3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_roof1.002
+    second: {fileID: 2100000, guid: f143ec85f605d1b4384cb252bd74f796, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_roof1.003
+    second: {fileID: 2100000, guid: cb11f659bd181704181b78139e511294, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_8_tall
+    second: {fileID: 2100000, guid: 7d45bca7638ce634fa2a1c5f20c5afd9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_SHOPS
+    second: {fileID: 2100000, guid: 69c0969ab48d2ab48a6d69c419976977, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_SHOPS.002
+    second: {fileID: 2100000, guid: 9dbfffad9a81d4043bd0f797434cfb29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9__hirise
+    second: {fileID: 2100000, guid: 1046c9b413722674eae8a6f029d4e3b8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_beton.002
+    second: {fileID: 2100000, guid: dc45d4c3c165a3344ba9d2ebdee76101, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_beton.003
+    second: {fileID: 2100000, guid: 69809f22103458040ae02281a37343e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_fasad2
+    second: {fileID: 2100000, guid: 8373b157980421c45aa325d71b4800e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_fasad3
+    second: {fileID: 2100000, guid: ce3d35559df4d564eabdfcab5b4c9617, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_grass.002
+    second: {fileID: 2100000, guid: 7b206ad8312efdd448068be20a4b4b2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_hirise3
+    second: {fileID: 2100000, guid: 35066c579edac1745946084179d0e90f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_hirise3.001
+    second: {fileID: 2100000, guid: e8ec36f6e59d7214189ddd11acf11087, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_roof1
+    second: {fileID: 2100000, guid: f2b1a060a03cb6a4d80afe67d6372443, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_roof1.002
+    second: {fileID: 2100000, guid: 64cad3378cb1b8a4caa058e51df83f96, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: area_9_trotuar.001
+    second: {fileID: 2100000, guid: 48d2ccdddbaf0a34e816559eaaec228f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_SHOPS
+    second: {fileID: 2100000, guid: 1e9b40f56f1e7564dba0abfecefbad36, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_beton
+    second: {fileID: 2100000, guid: b963d8b3368b9c54b879b9033f1e784e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_grass
+    second: {fileID: 2100000, guid: 6359540e8e0135b469a17f1cc415a596, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_hirise
+    second: {fileID: 2100000, guid: d22adec0997295f49a70c98bd66fc36b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_residental
+    second: {fileID: 2100000, guid: 2a2fc0fa7e2d98e479651d8c3657bd4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_residental2
+    second: {fileID: 2100000, guid: cde3a94d57d00e8468479ce26953e6e9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_roof
+    second: {fileID: 2100000, guid: d022e930b9f949b438313394ecafaf42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_trotuar
+    second: {fileID: 2100000, guid: c20570b4656813e43ad2b13a8a49a52e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_area_3_water
+    second: {fileID: 2100000, guid: bd3434c01864de349939cfdd40655167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_around_hirise1
+    second: {fileID: 2100000, guid: 63e90717b8c9e584b92cb8c38735c14a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_around_hirise2
+    second: {fileID: 2100000, guid: 17764c6737440c14585b23df90e96f24, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_around_hirise3
+    second: {fileID: 2100000, guid: 501b21a9c498824479c5681e2ac66b69, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_around_hirise4
+    second: {fileID: 2100000, guid: 99cc0d6b5ee46804ab67414552b4e715, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: house_around_hirise5
+    second: {fileID: 2100000, guid: 62b27e58f2930b349a504f0dd43a9412, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_Material.028
+    second: {fileID: 2100000, guid: ec51a7bf9d3d2ee46acae85ffa4f815f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_beton.003
+    second: {fileID: 2100000, guid: 8142e98cf36b3b44daffd95cb624eabe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_grass.002
+    second: {fileID: 2100000, guid: 1931a06bd1143364493e6f7329a81f05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_grass.003
+    second: {fileID: 2100000, guid: 537db1a23c9fc93459aa5712ab96904d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_grey_tiles
+    second: {fileID: 2100000, guid: 74a595afdc086f24286cb2b62ec6a5f7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_road.002
+    second: {fileID: 2100000, guid: 8c3d148920d89194bac9298acaa0b2ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_trotuar.001
+    second: {fileID: 2100000, guid: d42c6f2dd928c6e468b337c56bc1a2aa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_water.005
+    second: {fileID: 2100000, guid: 2a2988b803545184aa929ee6d9397370, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_water.006
+    second: {fileID: 2100000, guid: feb132eeeb40ad54497efe2bed1b673d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roads_waterfall.001
+    second: {fileID: 2100000, guid: f7a0c6441486fee41b215f5638fb7e88, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: water
+    second: {fileID: 2100000, guid: d3141a21c0fd4f74db6dbe92018b4fc1, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 0
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

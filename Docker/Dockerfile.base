@@ -1,0 +1,8 @@
+FROM ubuntu:xenial
+
+ARG DEBIAN_FRONTEND=noninteractive
+ARG DOCKER_VERSION=17.06.0-ce
+
+RUN apt-get update && apt-get install -y \
+        ca-certificates  \
+        libglu1 xvfb libxcursor1

@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7509396332941934134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3182737006816420517}
+  - component: {fileID: 42916433629968638}
+  - component: {fileID: 1753173644}
+  - component: {fileID: 3150591107503438083}
+  - component: {fileID: 2345608481647053452}
+  - component: {fileID: 3892280840765270580}
+  - component: {fileID: 919204787684195633}
+  m_Layer: 0
+  m_Name: CheckRemoteSceneObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3182737006816420517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &42916433629968638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac64a0a4b294c541bd3c9f08b36c936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1753173644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 0
+--- !u!114 &3150591107503438083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c70f8078e014796b77149618f4815b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _placePrefab: {fileID: 239950054691364709, guid: a0ad9bd454b702c4f97a049a998fbb51, type: 3}
+  _blackBoardPrefab: {fileID: 5191774445586269244, guid: 5b96df86ab345984a841212591225541, type: 3}
+  _browserPrefab: {fileID: 315226268436635237, guid: d367d248c104e6f4ca644acf1b126387, type: 3}
+  _adminPlacePrefab: {fileID: 7734588455157006836, guid: d061620261d078645b359481f3960080, type: 3}
+  _presentationPrefab: {fileID: 2784921178369626926, guid: 52d34a9f4126b834093f6ea171de438c, type: 3}
+--- !u!114 &2345608481647053452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ac768a746e41ec932347b18e734fb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levitationZonePrefab: {fileID: 1007175256550355701, guid: 501b4e576aec136428705cef3061c9b1, type: 3}
+  _spacePicturePrefab: {fileID: 8963270286881390129, guid: ef77e7aeb8f7e8445be4854854825b98, type: 3}
+  _spaceVideoPrefab: {fileID: 8463659114820587329, guid: ca209ddb600b796438e25754ede2f490, type: 3}
+  _presentationPrefab: {fileID: 2784921178369626926, guid: 52d34a9f4126b834093f6ea171de438c, type: 3}
+  _browserPadPrefab: {fileID: 879901868263825624, guid: 1234ae13e2b5e2f43ad355146178c29e, type: 3}
+  _networkFactory: {fileID: 0}
+--- !u!114 &3892280840765270580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3979e743e4da47e9a880f23ef4dde149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultSceneEnvironmentThemeBehaviours: []
+  _decorationEmptySceneObjectPrefab: {fileID: 5342521161376202648, guid: 739acb7184bf178449404ce170b9465f, type: 3}
+  _movableEmptySceneObjectPrefab: {fileID: 3210612113711500564, guid: 5cdaf770e8b2aaa498c37a1cbc468fcc, type: 3}
+  _networkInvoker: {fileID: 42916433629968638}
+  _customObjectsPrefab:
+  - ObjectKey: Pillow
+    CustomObjectPrefab: {fileID: 4163819747094368822, guid: 7a877072cd4e9c742a9bb217d83ce35e, type: 3}
+  - ObjectKey: CuttingRibbon
+    CustomObjectPrefab: {fileID: 4252479777056377580, guid: 421d722c16e0ae0499d88807334bfd75, type: 3}
+  - ObjectKey: Scissors
+    CustomObjectPrefab: {fileID: 1438065585462458836, guid: 7a5efa40890f9e5478e943ee6440380a, type: 3}
+  - ObjectKey: Ballon
+    CustomObjectPrefab: {fileID: 1239712068743320461, guid: bc6e62a6a6751cf4c87685e365d53b08, type: 3}
+  - ObjectKey: BallonCroud
+    CustomObjectPrefab: {fileID: 1239712068743320461, guid: cb0b204dd26bd0544a54f01fd46cfad9, type: 3}
+  - ObjectKey: BaloonsArch
+    CustomObjectPrefab: {fileID: 8121059599207824289, guid: b1ca213439b422d4b9a198f514a97b84, type: 3}
+  - ObjectKey: "BaloonOn\u0421eiling"
+    CustomObjectPrefab: {fileID: 8120107553958886888, guid: defcd82ad1646f749aedc2c024535981, type: 3}
+  - ObjectKey: Storm
+    CustomObjectPrefab: {fileID: 4505063629794577455, guid: 6e6dd40e6dfb3e744a1e11077ca2e64a, type: 3}
+  _apiServerSideSceneCustomObjectsSpawner: {fileID: 919204787684195633}
+--- !u!114 &919204787684195633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509396332941934134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e9f75502fd04d1ea30fd4c84be3ed24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _emptyPrefab: {fileID: 3569857283116178489, guid: c6ff6e0165c8da243b8acaed645b08cc, type: 3}
+  _apiClientSideSceneCustomObjectsSpawner: {fileID: 3892280840765270580}
+  _customLogicTowerObjectsSet: {fileID: 11400000, guid: 51790dfda60a9d1448ed1611c246c028, type: 2}
+  _stormPrefab: {fileID: 4870640434802309186, guid: 675d355ab1627f341a8f4a7eab6d0fc3, type: 3}
+  _mafiaTable: {fileID: 6116423877097878043, guid: f59318ba84981a947a379b77cbdef177, type: 3}
