@@ -1,0 +1,23 @@
+﻿@using SC.SenseTower.Admin.Cqrs.GalleriesPage
+@model GalleriesPageFilter
+<div>
+    <h6 class="mb-0">Название</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="Name" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Инфопанель</h6>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="isVisible" id="isVisible1" value="null" checked>
+    <label class="custom-control-label" for="statusName1">Любое</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="isVisible" id="isVisible2" value="true">
+    <label class="custom-control-label" for="statusName2">Показана</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="isVisible" id="isVisible3" value="false">
+    <label class="custom-control-label" for="statusName3">Не показана</label>
+</div>

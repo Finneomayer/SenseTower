@@ -1,0 +1,25 @@
+﻿@model string
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Отзыв приглашения</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="id" value="@Model" />
+                    <div class="input-group input-group-dynamic mb-3">
+                        <label class="form-label" for="reason">Причина отзыва</label>
+                        <input type="text" id="reason" name="reason" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn bg-gradient-primary"><i class="fas fa-ban"></i> Отозвать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

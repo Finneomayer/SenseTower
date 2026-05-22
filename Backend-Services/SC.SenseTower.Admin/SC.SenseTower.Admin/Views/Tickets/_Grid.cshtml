@@ -1,0 +1,86 @@
+﻿@using SC.SenseTower.Admin.Data.Models.Accounts
+@using SC.SenseTower.Admin.Models.Tickets
+@model TicketsViewModel
+@functions {
+    public string SortingClasses(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null)
+        {
+            return string.Empty;
+        }
+        return "sorted sorted-" + (sorting.Ascending ? "up" : "down");
+    }
+
+    public string SortingAttributes(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null || sorting.SortOrder <= 0)
+        {
+            return string.Empty;
+        }
+        return "data-sort-priority=" + sorting.SortOrder.ToString();
+    }
+}
+<div class="table-responsive">
+    <table class="table table-hover mb-2">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(Ticket.Id))" sorting data-sort-by="@nameof(Ticket.Id)" @SortingAttributes(nameof(Ticket.Id))>Код / Билет</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(Ticket.CreatedAt))" sorting data-sort-by="@nameof(Ticket.CreatedAt)" @SortingAttributes(nameof(Ticket.CreatedAt))>Создан</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Владелец</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(Ticket.UsingInfo) + "." + nameof(UsingInfo.Date))" sorting data-sort-by="@nameof(Ticket.UsingInfo).@nameof(UsingInfo.Date)" @SortingAttributes(nameof(Ticket.UsingInfo) + "." +nameof(UsingInfo.Date))>Активирован</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Кто активировал</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Отозван</th>
+                <th class="text-secondary text-xxs font-weight-bolder opacity-7 text-center"><i class="fas fa-bolt"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items.Length > 0)
+            {
+                foreach (var item in Model.Items)
+                {
+                    var textColor = item.IsRecalled ? "text-danger" : (item.UsedAt == null ? "text-info" : "");
+                    <tr data-id="@item.Id" class="cursor-pointer @textColor">
+                        <td class="align-middle">
+                            @item.Id
+                        </td>
+                        <td class="align-middle">
+                            @item.CreatedAt?.ToString("dd.MM.yyyy")
+                        </td>
+                        <td class="align-middle">
+                            @item.IssuerName
+                        </td>
+                        <td class="align-middle">
+                            @item.UsedAt?.ToString("dd.MM.yyyy")
+                        </td>
+                        <td class="align-middle">
+                            @item.UserName
+                        </td>
+                        <td class="align-middle text-center">
+                            @if (item.IsRecalled)
+                            {
+                            <i class="fas fa-check"></i>
+                            }
+                        </td>
+                        <td class="align-middle text-center">
+                            @if (!item.IsRecalled && item.UsedAt == null)
+                            {
+                                <a href="javascript:;"><i class="fas fa-ban"></i></a>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="align-middle text-center" colspan="7">
+                        <span class="h5">Данные не найдены</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_Paginator" model="Model.Pagination" />

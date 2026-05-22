@@ -1,0 +1,39 @@
+﻿@using SC.SenseTower.Admin.Cqrs.UsersPage
+@model UsersPageFilter
+@{
+    var roles = Model.AvailableRoles.Select(r => new SelectListItem { Text = r.Name, Value = r.Id.ToString() }).ToList();
+    roles.Insert(0, new SelectListItem { Text = "Любая", Value = "" });
+}
+<div>
+    <h6 class="mb-0">Имя входа</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="UserName" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Email</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="Email" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Роль пользователя</h6>
+</div>
+<div class="input-group input-group-static">
+    <select asp-for="RoleId" asp-items="roles" class="form-control"></select>
+</div>
+<div>
+    <h6 class="mb-0">Статус пользователя</h6>
+</div>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName1" checked>
+  <label class="custom-control-label" for="statusName1">Любой</label>
+</div>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName2" value="IsLocked">
+  <label class="custom-control-label" for="statusName2">Заблокирован</label>
+</div>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName3" value="IsNotLocked">
+  <label class="custom-control-label" for="statusName3">Не заблокирован</label>
+</div>

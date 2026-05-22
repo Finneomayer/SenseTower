@@ -1,0 +1,40 @@
+﻿@using SC.SenseTower.Admin.Models.Account
+@model LogonViewModel
+@{
+    var staticRootUrl = ViewBag.StaticRootUrl;
+}
+<div class="row my-5">
+    <div class="col-lg-4 col-md-8 col-12 mx-auto">
+        <div class="card z-index-0 fadeIn3 fadeInBottom">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Вход</h4>
+                </div>
+            </div>
+            <div class="card-body">
+                <form role="form" method="post" class="text-start">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <input type="hidden" asp-for="ReturnUrl" />
+                    <div class="input-group input-group-dynamic my-3">
+                        <label class="form-label" asp-for="UserName"></label>
+                        <input class="form-control" asp-for="UserName">
+                    </div>
+                    <div class="input-group input-group-dynamic mb-3">
+                        <label class="form-label" asp-for="Password"></label>
+                        <input type="password" class="form-control" asp-for="Password">
+                    </div>
+                    <div class="form-check form-switch d-flex align-items-center mb-3">
+                        <input class="form-check-input" type="checkbox" asp-for="RememberMe">
+                        <label class="form-check-label mb-0 ms-3" asp-for="RememberMe"></label>
+                    </div>
+                    <div class="mb-3">
+                        <a href="@(staticRootUrl)account/resetrequest" class="btn-link link-info">Забыли пароль?</a>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Войти</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@using SC.SenseTower.Admin.Cqrs.InvitesPage
+@model InvitesPageFilter
+<div>
+    <h6 class="mb-0">Состояние инвайта</h6>
+</div>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName1">
+  <label class="custom-control-label" for="statusName1">Любое</label>
+</div>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName2" value="Published" checked>
+  <label class="custom-control-label" for="statusName2">Выдан</label>
+</div>
+<div class="form-check mb-3">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName3" value="Used">
+  <label class="custom-control-label" for="statusName3">Использован</label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="statusName" id="statusName4" value="Recalled">
+  <label class="custom-control-label" for="statusName4">Отозван</label>
+</div>
+<div>
+    <h6 class="mb-0">Кем выдан</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="AuthorName" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Кому выдан</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="IssuerName" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Кем использован</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="UserName" class="form-control" />
+</div>

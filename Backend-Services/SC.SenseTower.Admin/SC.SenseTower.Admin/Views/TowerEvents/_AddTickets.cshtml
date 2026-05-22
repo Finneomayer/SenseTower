@@ -1,0 +1,32 @@
+﻿@using SC.SenseTower.Admin.Models.TowerEvents
+@using SC.SenseTower.Common.Enums
+@using SC.SenseTower.Common.Extensions
+@model TowerEventAddTicketsViewModel
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Добавление билетов</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <input type="hidden" asp-for="EventId" />
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Quantity">Количество</label>
+                                <input type="number" class="form-control" asp-for="Quantity" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-check"></i> Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

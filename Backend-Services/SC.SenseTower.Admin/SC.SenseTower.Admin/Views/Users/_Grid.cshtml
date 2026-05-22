@@ -1,0 +1,87 @@
+﻿@using SC.SenseTower.Admin.Data.Models.Identity
+@using SC.SenseTower.Admin.Models.Users
+@model UsersViewModel
+@functions {
+    public string SortingClasses(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null)
+        {
+            return string.Empty;
+        }
+        return "sorted sorted-" + (sorting.Ascending ? "up" : "down");
+    }
+
+    public string SortingAttributes(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null || sorting.SortOrder <= 0)
+        {
+            return string.Empty;
+        }
+        return "data-sort-priority=" + sorting.SortOrder.ToString();
+    }
+}
+<div class="table-responsive">
+    <table class="table table-hover mb-2">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(ApplicationUser.UserName))" sorting data-sort-by="@nameof(ApplicationUser.UserName)" @SortingAttributes(nameof(ApplicationUser.UserName))>Имя входа</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(ApplicationUser.Email))" sorting data-sort-by="@nameof(ApplicationUser.Email)" @SortingAttributes(nameof(ApplicationUser.Email))>Email</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Роль</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(ApplicationUser.AccessGrantedTo))" sorting data-sort-by="@nameof(ApplicationUser.AccessGrantedTo)" @SortingAttributes(nameof(ApplicationUser.AccessGrantedTo))>Доступ до</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Заблокирован</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center"><i class="fas fa-bolt"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items.Length > 0)
+            {
+                foreach (var item in Model.Items)
+                {
+                    <tr data-id="@item.Id" class="cursor-pointer">
+                        <td class="align-middle">
+                            @item.UserName
+                        </td>
+                        <td class="align-middle">
+                            @item.Email
+                        </td>
+                        <td class="align-middle">
+                            @item.RoleName
+                        </td>
+                        <td class="align-middle">
+                            @item.AccessGrantedTo?.ToString("dd-MM-yyyy HH:mm")
+                        </td>
+                        <td class="align-middle text-center">
+                            @if (item.IsLocked)
+                            {
+                                <i class="fas fa-check"></i>
+                            }
+                        </td>
+                        <td class="align-middle text-center">
+                            @if (item.IsLocked)
+                            {
+                                <a href="javascript:;" data-action="unban"><i class="fas fa-undo"></i></a>
+                            }
+                            else
+                            {
+                                <a href="javascript:;" data-action="upload-image"><i class="fas fa-image"></i></a>
+                                <a href="javascript:;" data-action="ban"><i class="fas fa-ban"></i></a>
+                            }
+                            <a href="javascript:;" class="text-danger" data-action="delete"><i class="fas fa-minus-circle"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="align-middle text-center" colspan="6">
+                        <span class="h5">Данные не найдены</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_Paginator" model="Model.Pagination" />

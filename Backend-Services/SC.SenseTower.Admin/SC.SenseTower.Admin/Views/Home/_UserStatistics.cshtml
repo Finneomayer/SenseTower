@@ -1,0 +1,90 @@
+﻿@using SC.SenseTower.Admin.Dto.Identity
+@model UserStatisticsDto
+<div class="row">
+    <div class="col-12">
+        <div class="mb-4 display-6">Пользователи</div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
+                    <i class="material-icons opacity-10">groups_2</i>
+                </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0">Всего</p>
+                    <h4 class="mb-0">@Model.TotalCount</h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">&nbsp;</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-primary shadow-primary text-center border-radius-xl mt-n4 position-absolute">
+                    <i class="material-icons opacity-10">people</i>
+                </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0">За месяц</p>
+                    <h4 class="mb-0">@Model.LastMonthCount</h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">
+                    <span class="text-@(Model.LastMonthCount < Model.PrevMonthCount ? "danger" : "success") text-sm font-weight-bolder">
+                        @((Model.PrevMonthCount > 0 ? Math.Round(((Model.LastMonthCount - Model.PrevMonthCount) * 1.0 / Model.PrevMonthCount) * 100.0, 0) : 0).ToString("+### ### ##0;-### ### ##0"))%
+                    </span>
+                    от предыдущего
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-success shadow-success text-center border-radius-xl mt-n4 position-absolute">
+                    <i class="material-icons opacity-10">people</i>
+                </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0">За неделю</p>
+                    <h4 class="mb-0">@Model.LastWeekCount</h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">
+                    <span class="text-@(Model.LastWeekCount < Model.PrevWeekCount ? "danger" : "success") text-sm font-weight-bolder">
+                        @((Model.PrevWeekCount > 0 ? Math.Round(((Model.LastWeekCount - Model.PrevWeekCount) * 1.0 / Model.PrevWeekCount) * 100.0, 0) : 0).ToString("+### ### ##0;-### ### ##0"))%
+                    </span>
+                    от предыдущей
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-sm-6">
+        <div class="card">
+            <div class="card-header p-3 pt-2">
+                <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 position-absolute">
+                    <i class="material-icons opacity-10">fmd_bad</i>
+                </div>
+                <div class="text-end pt-1">
+                    <p class="text-sm mb-0">За сегодня</p>
+                    <h4 class="mb-0">@Model.TodayCount</h4>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-3">
+                <p class="mb-0">
+                    <span class="text-@(Model.TodayCount < Model.YesterdayCount ? "danger" : "success") text-sm font-weight-bolder">
+                        @((Model.YesterdayCount > 0 ? Math.Round(((Model.TodayCount - Model.YesterdayCount) * 1.0 / Model.YesterdayCount) * 100.0, 0) : 0).ToString("+### ### ##0;-### ### ##0"))%
+                    </span>
+                    от вчерашнего
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

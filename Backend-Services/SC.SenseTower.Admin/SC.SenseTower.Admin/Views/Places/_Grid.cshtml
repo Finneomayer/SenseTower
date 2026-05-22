@@ -1,0 +1,76 @@
+﻿@using SC.SenseTower.Admin.Dto.Places
+@using SC.SenseTower.Admin.Models.Places
+@using SC.SenseTower.Common.Extensions
+@model PlacesViewModel
+@functions {
+    public string SortingClasses(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null)
+        {
+            return string.Empty;
+        }
+        return "sorted sorted-" + (sorting.Ascending ? "up" : "down");
+    }
+
+    public string SortingAttributes(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null || sorting.SortOrder <= 0)
+        {
+            return string.Empty;
+        }
+        return "data-sort-priority=" + sorting.SortOrder.ToString();
+    }
+}
+<div class="table-responsive">
+    <table class="table table-hover mb-2">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Картинка</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(PlacesGridItemDto.PlaceName))" sorting data-sort-by="@nameof(PlacesGridItemDto.PlaceName)" @SortingAttributes(nameof(PlacesGridItemDto.PlaceName))>Название</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses("PlaceNumber")" sorting data-sort-by="PlaceNumber" @SortingAttributes("PlaceNumber")>Номер</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Владелец</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Пространство</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Доступ</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Картинок</th>
+                <th class="text-secondary text-xxs font-weight-bolder opacity-7 text-center"><i class="fas fa-bolt"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items.Length > 0)
+            {
+                foreach (var item in Model.Items)
+                {
+                    <tr data-id="@item.Id" class="cursor-pointer">
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.DoorImageUrl))
+                            {
+                                <img src="@item.DoorImageUrl" class="place-door-image">
+                            }
+                        </td>
+                        <td>@item.PlaceName</td>
+                        <td>@item.Number</td>
+                        <td>@item.OwnerName</td>
+                        <td>@item.SpaceName</td>
+                        <td>@item.PublicAccessType.GetDisplayName()</td>
+                        <td>@item.ImageCount</td>
+                        <td class="align-middle text-center">
+                            <a href="javascript:;" class="text-success" data-action="edit-images" title="Редактировать список изображений"><i class="fas fa-images"></i></a>
+                            <a href="javascript:;" class="text-danger" data-action="delete" title="Удалить помещение"><i class="fas fa-minus-circle"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="align-middle text-center" colspan="7">
+                        <span class="h5">Данные не найдены</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_Paginator" model="Model.Pagination" />

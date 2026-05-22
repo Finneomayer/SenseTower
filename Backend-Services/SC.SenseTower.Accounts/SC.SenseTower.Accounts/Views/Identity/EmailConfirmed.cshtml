@@ -1,0 +1,31 @@
+﻿@using SC.SenseTower.Accounts.Dto.Identity
+@model OperationResultDto
+<div class="container-fluid">
+    <div class="row mt-5">
+        <div class="col-xs-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+            @if (Model.Succeeded)
+            {
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Поздравляем!</h4>
+                    <p>Ваш регистрационный email успешно подтверждён.</p>
+                    @if (!string.IsNullOrEmpty(Model.Message))
+                    {
+                        <p>@Model.Message</p>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">
+                    <h4 class="alert-heading">Ошибка!</h4>
+                    <p>
+                        Попытка подтверждения регистрационного email завершилась неудачей:<br/>
+                        @Model.Message
+                    </p>
+                    <hr/>
+                    <p class="mb-0">Попробуйте выполнить подтверждение позже. В случае повторного возникновения ошибки обратитесь в службу техподдержки.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

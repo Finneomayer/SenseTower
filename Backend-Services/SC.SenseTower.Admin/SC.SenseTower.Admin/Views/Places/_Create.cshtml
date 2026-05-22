@@ -1,0 +1,88 @@
+﻿@using SC.SenseTower.Admin.Dto.Places
+@using SC.SenseTower.Common.Enums
+@using SC.SenseTower.Common.Extensions
+@model PlaceDto
+@{
+    var spaces = Model.AvailableSpaces.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    spaces.Insert(0, new SelectListItem { Text = "(не выбрано)", Value = "" });
+    var images = Model.AvailableImages.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    images.Insert(0, new SelectListItem { Text = "(не выбрано)", Value = "" });
+    var users = Model.AvailableUsers.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    users.Insert(0, new SelectListItem { Text = "(не выбран)", Value = "" });
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Создание помещения</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Id">Ид помещения</label>
+                                <input type="text" class="form-control" asp-for="Id" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="PlaceName">Название</label>
+                                <input type="text" class="form-control" asp-for="PlaceName" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="OwnerId">Владелец</label>
+                                <select class="form-control" asp-for="OwnerId" asp-items="@users"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6 d-flex">
+                            <div class="gallery-info-image">
+                            @if (Model.DoorImageId != null)
+                            {
+                                <img src="@Model.DoorImageUrl" />
+                            }
+                            else
+                            {
+                                <img src="~/img/no-photo.jpg" />
+                            }
+                            </div>
+                            <div>
+                                <div class="input-group input-group-static">
+                                    <label class="ms-0" asp-for="DoorImageId">Изображение</label>
+                                    <select class="form-control" asp-for="DoorImageId" asp-items="@images"></select>
+                                </div>
+                                <button type="button" id="remove-image" class="btn btn-warning btn-icon w-100"><i class="material-icons">delete</i> Удалить</button>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="SpaceId">Пространство</label>
+                                <select class="form-control" asp-for="SpaceId" asp-items="@spaces"></select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <label class="ms-0">Доступ</label>
+                            @foreach(var item in Enum.GetValues<AccessType>())
+                            {
+                            <div class="form-check pl-0">
+                                @Html.RadioButtonFor(x => x.PublicAccessType, item, new { @class = "form-check-input", id = item.ToString() })
+                                <label class="custom-control-label" for="item">@item.GetDisplayName()</label>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-check"></i> Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

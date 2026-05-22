@@ -1,0 +1,40 @@
+﻿@using SC.SenseTower.Admin.Dto.Galleries
+@using SC.SenseTower.Admin.Dto.Images
+@using SC.SenseTower.Admin.Models.Galleries
+@model GalleryImagesViewModel
+@{
+    var images = Model.AvailableImages.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    images.Insert(0, new SelectListItem { Text = "выберите изображение", Value = "" });
+    ViewBag.Images = images;
+    var maxPosition = Model.Images.Any() ? Model.Images.Max(x => x.Position) : 0;
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Просмотр галереи</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body gallery-image-list" data-id="@Model.GalleryId">
+                @for (var i = 0; i <= maxPosition; i++)
+                {
+                    var item = Model.Images.FirstOrDefault(x => x.Position == i);
+                    <div class="gallery-image-place">
+                    @if (item != null)
+                    {
+                        <partial name="_Image" model="item" />
+                    }
+                    </div>
+                }
+                <div class="gallery-image-place"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary btn-icon" id="save-image-list"><i class="fas fa-check"></i> Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

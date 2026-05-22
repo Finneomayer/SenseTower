@@ -1,0 +1,36 @@
+services:
+  reproxy:
+    image: ghcr.io/umputun/reproxy
+    container_name: reproxy
+    hostname: reproxy
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOCKER_ENABLED=true
+      - LOGGER_ENABLED=true
+      - LOGGER_STDOUT=true      
+      - DOCKER_AUTO=true
+      - DEBUG=true
+      - MAX_SIZE=100M
+      - SSL_TYPE=auto
+      - SSL_ACME_FQDN=webrtc.sensetower.io
+      - HEADER=
+          X-Frame-Options:SAMEORIGIN,
+          X-XSS-Protection:1; mode=block;,
+          Content-Security-Policy:default-src 'self' *.sensetower.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://cdn.jsdelivr.net https://buttons.github.io https://cdnjs.cloudflare.com;
+  webrtc:
+    container_name: webrtc
+    hostname: webrtc
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.webrtc.dev:2022-11-14.0"
+    environment:
+      - PORT=7773
+    ports:
+      - "7773:7773"
+    restart: always
+    labels:
+      reproxy.route: '^/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7773'

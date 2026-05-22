@@ -1,0 +1,24 @@
+﻿@using SC.SenseTower.Admin.Cqrs.TowerEventsPage
+@using SC.SenseTower.Admin.Models.Places
+@model PlacesViewModel
+@{
+    ViewData["Title"] = "Помещения";
+    var staticRootUrl = ViewBag.StaticRootUrl;
+}
+<div class="row">
+    <div class="col-12 mb-2">
+        <button class="btn btn-icon btn-3 btn-info" type="button" id="add-place">
+            <span class="btn-inner--icon"><span class="material-icons">add_circle</span></span>
+            <span class="btn-inner--text">Создать помещение</span>
+        </button>
+    </div>
+    <div class="col-12">
+        <div class="card" id="places-grid">
+            <partial name="_Grid" model="Model" />
+        </div>
+    </div>
+</div>
+<partial name="_FilterPanel" model="Model.Filter" />
+@section Scripts {
+    <script src="@(staticRootUrl)js/pages/places.js" asp-append-version="true"></script>
+}

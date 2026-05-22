@@ -1,0 +1,24 @@
+﻿@using SC.SenseTower.Admin.Cqrs.TicketsPage
+@using SC.SenseTower.Admin.Models.Tickets
+@model TicketsViewModel
+@{
+    ViewData["Title"] = "Гостевые приглашения";
+    var staticRootUrl = ViewBag.StaticRootUrl;
+}
+<div class="row">
+    <div class="col-12 mb-2">
+        <button class="btn btn-icon btn-3 btn-info" type="button" id="admin-batch-add">
+            <span class="btn-inner--icon"><span class="material-icons">playlist_add</span></span>
+            <span class="btn-inner--text">Пакет для админа</span>
+        </button>
+    </div>
+    <div class="col-12">
+        <div class="card" id="tickets-grid">
+            <partial name="_Grid" model="Model" />
+        </div>
+    </div>
+</div>
+<partial name="_FilterPanel" model="new TicketsPageFilter()" />
+@section Scripts {
+    <script src="@(staticRootUrl)js/pages/tickets.js" asp-append-version="true"></script>
+}

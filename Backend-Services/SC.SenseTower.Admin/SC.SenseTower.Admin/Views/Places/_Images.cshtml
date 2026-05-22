@@ -1,0 +1,49 @@
+﻿@using SC.SenseTower.Admin.Dto.Places
+@using SC.SenseTower.Admin.Dto.Images
+@using SC.SenseTower.Admin.Models.Places
+@model PlaceImagesViewModel
+@{
+    var images = Model.AvailableImages.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    var imageUrl = Model.AvailableImages.FirstOrDefault()?.PreviewUrl;
+    var imageRootUrl = imageUrl?.Substring(0, imageUrl.IndexOf("/api/") + 1);
+    images.Insert(0, new SelectListItem { Text = "выберите изображение", Value = "" });
+    ViewBag.Images = images;
+    var staticRootUrl = (string)ViewBag.StaticRootUrl;
+    var emptyImage = new ImageInfoDto { PreviewUrl = staticRootUrl + "img/no-photo.jpg" };
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Изображения в помещении</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <input type="hidden" id="static-root-url" value="@staticRootUrl" />
+            <input type="hidden" id="image-root-url" value="@imageRootUrl" />
+            <div class="modal-body place-image-list" data-id="@Model.PlaceId">
+                @for (var i = 0; i < 4; i++)
+                {
+                    ViewBag.ImageLocation = i;
+                    <div class="place-image-place">
+                    @if (Model.Images.ContainsKey(i))
+                    {
+                        var item = Model.Images[i];
+                        <partial name="_Image" model="item" />
+                    }
+                    else
+                    {
+                        <partial name="_Image" model="emptyImage" />
+                    }
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary btn-icon" id="save-image-list"><i class="fas fa-check"></i> Сохранить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

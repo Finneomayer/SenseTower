@@ -1,0 +1,21 @@
+﻿@using SC.SenseTower.Admin.Constants
+@using SC.SenseTower.Admin.Models.Profile
+@inject IConfiguration configuration
+@model ProfileViewModel
+@{
+    var staticRootUrl = configuration.GetValue<string>(ConfigKeys.STATIC_ROOT_URL);
+}
+@section Scripts {
+    <script src="@(staticRootUrl)js/pages/profile.js" asp-append-version="true"></script>
+}
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-xl-4 col-xxl-3" id="set-password">
+        <div class="card">
+            <div class="card-body">
+                <form asp-controller="Profile" asp-action="SetPassword" method="post">
+                    <partial name="_SetPassword" model="Model.Password" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@using SC.SenseTower.Admin.Models.Account
+@model ResetRequestViewModel
+<div class="row mt-5">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-lg-4 col-xxl-2 offset-sm-2 offset-md-3 offset-lg-4 offset-xxl-2">
+        <div class="card z-index-0 fadeIn3 fadeInBottom">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
+                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Восстановление пароля</h4>
+                </div>
+            </div>
+            <form method="post">
+                <div class="card-body">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="input-group input-group-dynamic my-3">
+                        <label asp-for="LoginOrEmail" class="form-label">Имя входа или email</label>
+                        <input type="text" class="form-control" asp-for="LoginOrEmail" />
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Восстановить пароль</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

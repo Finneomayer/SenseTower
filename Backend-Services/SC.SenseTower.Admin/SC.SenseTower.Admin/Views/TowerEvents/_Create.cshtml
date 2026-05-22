@@ -1,0 +1,108 @@
+﻿@using SC.SenseTower.Admin.Dto.TowerEvents
+@using SC.SenseTower.Common.Enums
+@using SC.SenseTower.Common.Extensions
+@model TowerEventDto
+@{
+    var spaces = Model.AvailableSpaces.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToArray();
+    var images = Model.AvailableImages.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    images.Insert(0, new SelectListItem { Text = "(не выбрано)", Value = "" });
+    var staticRootUrl = (string)ViewBag.StaticRootUrl;
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Создание события</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Id">Ид события</label>
+                                <input type="text" class="form-control" asp-for="Id" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="From">Начало</label>
+                                <input type="datetime-local" class="form-control" asp-for="From" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="UpTo">Завершение</label>
+                                <input type="datetime-local" class="form-control" asp-for="UpTo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4 d-flex">
+                            <div class="gallery-info-image">
+                            @if (Model.ImageId != null)
+                            {
+                                <img src="@Model.ImageUrl" />
+                            }
+                            else
+                            {
+                                <img src="@(staticRootUrl)img/no-photo.jpg" />
+                            }
+                            </div>
+                            <div>
+                                <div class="input-group input-group-static">
+                                    <label class="ms-0" asp-for="ImageId">Изображение</label>
+                                    <select class="form-control" asp-for="ImageId" asp-items="@images"></select>
+                                </div>
+                                <button type="button" id="remove-image" class="btn btn-warning btn-icon w-100"><i class="material-icons">delete</i> Удалить</button>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Title">Название</label>
+                                <input type="text" class="form-control" asp-for="Title" />
+                            </div>
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="TotalTickets">Билетов</label>
+                                <input type="number" class="form-control" asp-for="TotalTickets" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Description">Описание</label>
+                                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0">Состояние</label>
+                                <div>
+                                @foreach (var item in Enum.GetValues(typeof(TowerEventState)).Cast<TowerEventState>())
+                                {
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="State" id="State@((int)item)" value="@((int)item)" @(Model.State == item ? "checked" : "") />
+                                        <label class="custom-control-label" for="State@((int)item)">@item.GetDisplayName()</label>
+                                    </div>
+                                }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="SpaceId">Пространство</label>
+                                <select class="form-control" asp-for="SpaceId" asp-items="@spaces"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-check"></i> Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

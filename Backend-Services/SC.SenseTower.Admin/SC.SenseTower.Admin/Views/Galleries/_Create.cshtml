@@ -1,0 +1,70 @@
+﻿@using SC.SenseTower.Admin.Dto.Galleries
+@model GalleryDto
+@{
+    var spaces = Model.AvailableSpaces.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToArray();
+    var images = Model.AvailableImages.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToArray();
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Создание галереи</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-group input-group-static mb-3">
+                                <label class="ms-0" asp-for="Name">Название</label>
+                                <input type="text" class="form-control" asp-for="Name" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="SpaceId">Пространство</label>
+                                <select class="form-control" asp-for="SpaceId" asp-items="@spaces"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 d-flex">
+                            <div class="gallery-info-image">
+                            @if (Model.ImageId != null)
+                            {
+                                <img src="@Model.ImageUrl" />
+                            }
+                            else
+                            {
+                                <img src="~/img/no-photo.jpg" />
+                            }
+                            </div>
+                            <div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" asp-for="IsVisible" checked="">
+                                    <label class="form-check-label" asp-for="IsVisible">Показывать информацию</label>
+                                </div>
+                                <div class="input-group input-group-static">
+                                    <label class="ms-0" asp-for="ImageId">Изображение</label>
+                                    <select class="form-control" asp-for="ImageId" asp-items="@images"></select>
+                                </div>
+                                <button type="button" id="remove-image" class="btn btn-warning btn-icon w-100"><i class="material-icons">delete</i> Удалить</button>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-group input-group-static mb-3">
+                                <label class="ms-0" asp-for="Description">Описание</label>
+                                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-check"></i> Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

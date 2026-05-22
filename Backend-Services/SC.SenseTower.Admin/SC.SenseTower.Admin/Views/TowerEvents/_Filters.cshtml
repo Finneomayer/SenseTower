@@ -1,0 +1,53 @@
+﻿@using SC.SenseTower.Admin.Cqrs.TowerEventsPage
+@using SC.SenseTower.Common.Enums
+@model TowerEventsPageFilter
+@{
+    var spaces = Model.AvailableSpaces.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    spaces.Insert(0, new SelectListItem { Text = "Любое", Value = "" });
+}
+<div>
+    <h6 class="mb-0">Период</h6>
+</div>
+<div class="row">
+    <div class="col-6">
+        <div class="input-group input-group-static">
+            <input type="date" asp-for="From" class="form-control" />
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="input-group input-group-static">
+            <input type="date" asp-for="UpTo" class="form-control" />
+        </div>
+    </div>
+</div>
+<div>
+    <h6 class="mb-0">Пространство</h6>
+</div>
+<div class="input-group input-group-static">
+    <select class="form-control" asp-for="SpaceId" asp-items="@spaces"></select>
+</div>
+<div>
+    <h6 class="mb-0">Название</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="Title" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Состояние</h6>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="state" id="state1" value="null" checked>
+    <label class="custom-control-label" for="state1">Любое</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="state" id="state2" value="@((int)TowerEventState.Planned)">
+    <label class="custom-control-label" for="state2">Запланировано</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="state" id="state3" value="@((int)TowerEventState.Moved)">
+    <label class="custom-control-label" for="state3">Перенесено</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="state" id="state4" value="@((int)TowerEventState.Cancelled)">
+    <label class="custom-control-label" for="state4">Отменено</label>
+</div>

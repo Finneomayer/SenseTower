@@ -1,0 +1,27 @@
+﻿@using MediatR
+@using SC.SenseTower.Admin.Cqrs.Lookups
+@using SC.SenseTower.Admin.Cqrs.UsersPage
+@using SC.SenseTower.Admin.Models.Users
+@inject IMediator mediator
+@model UsersViewModel
+@{
+    ViewData["Title"] = "Пользователи";
+    var staticRootUrl = ViewBag.StaticRootUrl;
+}
+<div class="row">
+    @*<div class="col-12 mb-2">
+        <button class="btn btn-icon btn-3 btn-info" type="button">
+            <span class="btn-inner--icon"><span class="material-icons">engineering</span></span>
+            <span class="btn-inner--text">Починить</span>
+        </button>
+    </div>*@
+    <div class="col-12">
+        <div class="card" id="users-grid">
+            <partial name="_Grid" model="Model" />
+        </div>
+    </div>
+</div>
+<partial name="_FilterPanel" model="new UsersPageFilter { AvailableRoles = await mediator.Send(new LookupRolesRequest()) }" />
+@section Scripts {
+    <script src="@(staticRootUrl)js/pages/users.js" asp-append-version="true"></script>
+}

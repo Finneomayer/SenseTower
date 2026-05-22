@@ -1,0 +1,89 @@
+﻿@using SC.SenseTower.Admin.Dto.Invites
+@using SC.SenseTower.Admin.Constants
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model InviteDetailsDto
+@inject IConfiguration configuration
+
+@{
+    var staticRootUrl = configuration.GetValue<string>(ConfigKeys.STATIC_ROOT_URL);
+}
+
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Просмотр приглашения</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="invite-id">Код приглашения</label>
+                            <input type="text" id="invite-id" class="form-control" readonly value="@Model.Id" />
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="invite-created">Создано</label>
+                            <input type="text" id="invite-created" class="form-control" readonly value="@Model.CreatedAt?.ToString("dd.MM.yyyy")" />
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="invite-author">Кем выдан</label>
+                            <input type="text" id="invite-author" class="form-control" readonly value="@($"{Model.AuthorName} ({Model.AuthorId})")" />
+                        </div>
+                        <div class="input-group input-group-static">
+                            <label class="ms-0" for="invite-issuer">Владелец</label>
+                            <input type="text" id="invite-issuer" class="form-control" readonly value="@($"{Model.IssuerName} ({Model.IssuerId})")" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="invite-user">Кто использовал</label>
+                            <input type="text" id="invite-user" class="form-control" readonly value="@($"{Model.UserName} ({Model.UserId})")" />
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="invite-used">Когда использовал</label>
+                            <input type="text" id="invite-used" class="form-control" readonly value="@Model.UsingDate?.ToString("dd.MM.yyyy HH:mm:ss")" />
+                        </div>
+                        @if (Model.RecallDate == null && Model.UsingDate == null)
+                        {
+                            <form method="post">
+                                <input type="hidden" name="id" value="@Model.Id">
+                                <div class="input-group input-group-static mb-3">
+                                    <label class="ms-0" for="invite-reason">Причина отзыва</label>
+                                    <input type="text" id="invite-reason" name="reason" class="form-control" />
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-warning btn-icon"><i class="fas fa-ban"></i> Отозвать</button>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="input-group input-group-static mb-3">
+                                <label class="ms-0" for="invite-recalled">Отозвано</label>
+                                <input type="text" id="invite-recalled" class="form-control" readonly value="@Model.RecallDate?.ToString("dd.MM.yyyy HH:mm:ss")" />
+                            </div>
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" for="invite-reason">Причина отзыва</label>
+                                <input type="text" id="invite-reason" name="reason" class="form-control" readonly value="@Model.RecallReason" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                @if (Model.RecallDate == null && Model.UsingDate == null)
+                {
+                    <div class="row">
+                        <div class="col-12">
+                            <p style='text-align: center'>QR code</p>
+                            <div style='text-align: center'>
+                                <img src='@(staticRootUrl)invites/@(Model.Id)/qr' alt='invite qr image' style='width: 200px'/>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

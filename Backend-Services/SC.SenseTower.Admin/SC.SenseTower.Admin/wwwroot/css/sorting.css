@@ -1,0 +1,18 @@
+﻿th[sorting] {
+    cursor: pointer;
+/*    padding-right: 25px;*/
+}
+.sort-priority {
+    float: right;
+    margin-right: -20px;
+}
+.sorted-up .sort-priority:before {
+    float: right;
+    margin-right: -5px;
+    content: '\02191';
+}
+.sorted-down .sort-priority:before {
+    float: right;
+    margin-right: -5px;
+    content: '\02193';
+}

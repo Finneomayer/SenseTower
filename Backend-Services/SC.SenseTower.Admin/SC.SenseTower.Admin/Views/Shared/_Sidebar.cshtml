@@ -1,0 +1,77 @@
+﻿@using SC.SenseTower.Admin.Constants
+@model string
+@{
+    var currentItem = (string)ViewBag.SelectedMenuItem;
+    var activeLink = "active bg-gradient-primary";
+    var staticRootUrl = Model;
+}
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href="@(staticRootUrl)home/">
+            <img src="@(staticRootUrl)img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold text-white">SenseTower админ</span>
+        </a>
+    </div>
+    <hr class="horizontal light mt-0 mb-2">
+    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_HOME ? activeLink : "")" href="@(staticRootUrl)home/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">dashboard</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Статистика</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_USERS ? activeLink : "")" href="@(staticRootUrl)users/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">groups_2</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Пользователи</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_PLACES ? activeLink : "")" href="@(staticRootUrl)places/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">apartment</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Помещения</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_INVITES ? activeLink : "")" href="@(staticRootUrl)invites/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">insert_invitation</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Приглашения</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_TEMP_INVITES ? activeLink : "")" href="@(staticRootUrl)tickets/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">local_activity</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Гостевые приглашения</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_GALLERIES ? activeLink : "")" href="@(staticRootUrl)galleries/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">collections</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Галереи</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white @(currentItem == MenuItems.MENU_TOWER_EVENTS ? activeLink : "")" href="@(staticRootUrl)towerevents/">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">theater_comedy</i>
+                    </div>
+                    <span class="nav-link-text ms-1">События</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

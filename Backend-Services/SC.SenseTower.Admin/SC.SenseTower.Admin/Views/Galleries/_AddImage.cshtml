@@ -1,0 +1,65 @@
+﻿@using SC.SenseTower.Admin.Dto.Images
+@using SC.SenseTower.Admin.Models.Galleries
+@model AddGalleryImageViewModel
+@{
+    var images = Model.AvailableImages.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    images.Insert(0, new SelectListItem { Text = "выберите изображение", Value = "" });
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Добавление изображения</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post">
+                    <input type="hidden" asp-for="GalleryId" />
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="ImageId">Изображение</label>
+                                <select class="form-control" asp-for="ImageId" asp-items="@images"></select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Author">Автор</label>
+                                <input class="form-control" asp-for="Author" />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Name">Название</label>
+                                <input class="form-control" asp-for="Name" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="PassepartoutWidthInMeters">Ширина паспарту</label>
+                                <input class="form-control" asp-for="PassepartoutWidthInMeters" min="0.5" />
+                            </div>
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="PictureWidthInMeters">Ширина картины</label>
+                                <input class="form-control" asp-for="PictureWidthInMeters" min="0.5" />
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" asp-for="Description">Описание</label>
+                                <textarea class="form-control" asp-for="Description" rows="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-check"></i> Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

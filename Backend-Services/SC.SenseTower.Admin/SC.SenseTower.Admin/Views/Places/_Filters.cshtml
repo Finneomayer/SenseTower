@@ -1,0 +1,47 @@
+﻿@using SC.SenseTower.Admin.Cqrs.PlacesPage
+@using SC.SenseTower.Common.Enums
+@using SC.SenseTower.Common.Extensions
+@model PlacesPageFilter
+@{
+    var owners = Model.AvailableUsers.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    owners.Insert(0, new SelectListItem { Text = "Любой", Value = "" });
+    var spaces = Model.AvailableSpaces.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+    spaces.Insert(0, new SelectListItem { Text = "Любое", Value = "" });
+}
+<div>
+    <h6 class="mb-0">Название</h6>
+</div>
+<div class="input-group input-group-static">
+    <input type="text" asp-for="PlaceName" class="form-control" />
+</div>
+<div>
+    <h6 class="mb-0">Владелец</h6>
+</div>
+<div class="input-group input-group-static">
+    <select class="form-control" asp-for="OwnerId" asp-items="@owners"></select>
+</div>
+<div>
+    <h6 class="mb-0">Пространство</h6>
+</div>
+<div class="input-group input-group-static">
+    <select class="form-control" asp-for="SpaceId" asp-items="@spaces"></select>
+</div>
+<div>
+    <h6 class="mb-0">Доступ</h6>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="accessType" id="accessType1" value="null" checked>
+    <label class="custom-control-label" for="accessType1">Любой</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="accessType" id="accessType2" value="@((int)AccessType.Public)">
+    <label class="custom-control-label" for="accessType2">@AccessType.Public.GetDisplayName()</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="accessType" id="accessType3" value="@((int)AccessType.Live)">
+    <label class="custom-control-label" for="accessType3">@AccessType.Live.GetDisplayName()</label>
+</div>
+<div class="form-check mb-3">
+    <input class="form-check-input" type="radio" name="accessType" id="accessType4" value="@((int)AccessType.Private)">
+    <label class="custom-control-label" for="accessType4">@AccessType.Private.GetDisplayName()</label>
+</div>

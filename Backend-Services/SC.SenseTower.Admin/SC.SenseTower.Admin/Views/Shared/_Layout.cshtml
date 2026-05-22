@@ -1,0 +1,59 @@
+﻿@using SC.SenseTower.Admin.Constants
+@inject IConfiguration configuration
+@{
+    var staticRootUrl = configuration.GetValue<string>(ConfigKeys.STATIC_ROOT_URL);
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>@ViewData["Title"] - SC.SenseTower.Admin</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+    <link href="@(staticRootUrl)lib/theme/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="@(staticRootUrl)lib/theme/assets/css/nucleo-svg.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <link id="pagestyle" href="@(staticRootUrl)lib/theme/assets/css/material-dashboard.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="@(staticRootUrl)css/sorting.css" />
+    <link rel="stylesheet" href="@(staticRootUrl)css/site.css" />
+    <link rel="stylesheet" href="@(staticRootUrl)SC.SenseTower.Admin.styles.css" />
+</head>
+<body class="g-sidenav-show bg-gray-100">
+    <partial name="_Sidebar" model="staticRootUrl" />
+    <main role="main" class="main-content position-relative h-100 border-radius-lg ">
+        <partial name="_Navbar" model="staticRootUrl" />
+        <div class="container-fluid py-4">
+            @RenderBody()
+            <partial name="_Footer" />
+        </div>
+        <div data-class="dummy" style="display:none"></div>
+    </main>
+    <!--   Core JS Files   -->
+    <script src="@(staticRootUrl)lib/jquery/dist/jquery.min.js"></script>
+    <script src="@(staticRootUrl)lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="@(staticRootUrl)lib/theme/assets/js/core/popper.min.js"></script>
+    <script src="@(staticRootUrl)lib/theme/assets/js/core/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="@(staticRootUrl)lib/theme/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="@(staticRootUrl)lib/theme/assets/js/plugins/smooth-scrollbar.min.js"></script>
+@*    <script src="~/lib/theme/assets/js/plugins/chartjs.min.js"></script>
+    <script src="~/lib/theme/assets/js/plugins/Chart.extension.js"></script>*@
+@*    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+          var options = {
+            damping: '0.5'
+          }
+          Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>*@
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="@(staticRootUrl)lib/theme/assets/js/material-dashboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="@(staticRootUrl)js/sorting.js"></script>
+    <script src="@(staticRootUrl)js/site.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

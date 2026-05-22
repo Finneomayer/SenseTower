@@ -1,0 +1,40 @@
+﻿@model Guid
+@{
+    var token = (string)ViewBag.Token;
+    var imagesRootlUrl = (string)ViewBag.ImagesRootUrl;
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <input type="hidden" id="token" value="@token" />
+        <input type="hidden" id="imagesRootUrl" value="@imagesRootlUrl" />
+        <form method="post">
+            <input type="hidden" id="userId" value="@Model" />
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-normal">Загрузка изображения</h5>
+                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="input-group input-group-static mb-3">
+                                <label class="ms-0" for="name">Название</label>
+                                <input type="text" id="name" name="name" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="input-group input-group-static mb-3">
+                                <input type="file" name="file" id="file" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-icon"><i class="fas fa-check"></i> Загрузить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

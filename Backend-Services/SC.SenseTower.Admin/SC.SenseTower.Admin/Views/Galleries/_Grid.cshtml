@@ -1,0 +1,73 @@
+﻿@using SC.SenseTower.Admin.Dto.Galleries
+@using SC.SenseTower.Admin.Models.Galleries
+@model GalleriesViewModel
+@functions {
+    public string SortingClasses(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null)
+        {
+            return string.Empty;
+        }
+        return "sorted sorted-" + (sorting.Ascending ? "up" : "down");
+    }
+
+    public string SortingAttributes(string fieldName)
+    {
+        var sorting = Model.Sorting.FirstOrDefault(r => r.PropertyName == fieldName);
+        if (sorting == null || sorting.SortOrder <= 0)
+        {
+            return string.Empty;
+        }
+        return "data-sort-priority=" + sorting.SortOrder.ToString();
+    }
+}
+<div class="table-responsive">
+    <table class="table table-hover mb-2">
+        <thead>
+            <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 @SortingClasses(nameof(GalleryGridItemDto.Name))" sorting data-sort-by="@nameof(GalleryGridItemDto.Name)" @SortingAttributes(nameof(GalleryGridItemDto.Name))>Название</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Название сцены</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Инфопанель</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Картин</th>
+                <th class="text-secondary text-xxs font-weight-bolder opacity-7 text-center"><i class="fas fa-bolt"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Items.Length > 0)
+            {
+                foreach (var item in Model.Items)
+                {
+                    <tr data-id="@item.Id" class="cursor-pointer">
+                        <td class="align-middle">
+                            @item.Name
+                        </td>
+                        <td class="align-middle">
+                            @item.SceneName
+                        </td>
+                        <td class="align-middle">
+                            <i class="material-icons @(item.IsVisible ? "text-success" : "")">@(item.IsVisible ? "visibility" : "visibility_off")</i>
+                        </td>
+                        <td class="align-middle">
+                            @item.PicturesCount
+                        </td>
+                        <td class="align-middle text-center">
+                            <a href="javascript:;" class="text-info" data-action="image-add" title="Добавить изображение"><i class="fas fa-plus-circle"></i></a>
+                            <a href="javascript:;" class="text-info" data-action="image-list" title="Просмотреть список изображений"><i class="fas fa-images"></i></a>
+                            <a href="javascript:;" class="text-danger" data-action="delete" title="Удалить галерею"><i class="fas fa-minus-circle"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="align-middle text-center" colspan="5">
+                        <span class="h5">Данные не найдены</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<partial name="_Paginator" model="Model.Pagination" />

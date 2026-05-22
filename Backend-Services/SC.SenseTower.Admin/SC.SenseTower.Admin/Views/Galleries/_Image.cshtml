@@ -1,0 +1,53 @@
+﻿@using SC.SenseTower.Admin.Dto.Galleries
+@using SC.SenseTower.Admin.Dto.Images
+@model GalleryImageDto
+@{
+    var images = (IList<SelectListItem>)ViewBag.Images;
+}
+<div class="row gallery-image-list-item" data-id="@Model.ImageId">
+    <div class="col-12 d-flex">
+        <div class="mover"></div>
+        <div class="gallery-info-image">
+            <img src="@Model.ImageUrl" />
+        </div>
+        <div>
+            <div class="input-group input-group-static">
+                <label class="ms-0" asp-for="ImageId">Изображение</label>
+                <select class="form-control" asp-for="ImageId" asp-items="@images"></select>
+                <button type="button" name="remove-image" class="btn btn-warning input-group-text" data-position="@Model.Position"><i class="fas fa-eraser"></i> Очистить</button>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="input-group input-group-static">
+                        <label class="ms-0" asp-for="Author">Автор</label>
+                        <input type="text" class="form-control" asp-for="Author" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="input-group input-group-static">
+                        <label class="ms-0" asp-for="Name">Название</label>
+                        <input type="text" class="form-control" asp-for="Name" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div class="input-group input-group-static">
+                        <label class="ms-0" asp-for="PassepartoutWidthInMeters">Ширина паспарту</label>
+                        <input class="form-control" asp-for="PassepartoutWidthInMeters" min="0.5" />
+                    </div>
+                    <div class="input-group input-group-static">
+                        <label class="ms-0" asp-for="PictureWidthInMeters">Ширина картины</label>
+                        <input class="form-control" asp-for="PictureWidthInMeters" min="0.5" />
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="input-group input-group-static">
+                        <label class="ms-0" asp-for="Description">Описание</label>
+                        <textarea class="form-control" asp-for="Description" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

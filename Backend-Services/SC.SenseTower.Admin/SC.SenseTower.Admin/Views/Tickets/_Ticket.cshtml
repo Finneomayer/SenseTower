@@ -1,0 +1,66 @@
+﻿@using SC.SenseTower.Admin.Dto.Tickets
+@model TicketDetailsDto
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Просмотр билета</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="ticket-id">Код билета</label>
+                            <input type="text" id="ticket-id" class="form-control" readonly value="@Model.Id" />
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="ticket-created">Создан</label>
+                            <input type="text" id="ticket-created" class="form-control" readonly value="@Model.CreatedAt?.ToString("dd.MM.yyyy")" />
+                        </div>
+                        <div class="input-group input-group-static">
+                            <label class="ms-0" for="ticket-issuer">Владелец</label>
+                            <input type="text" id="ticket-issuer" class="form-control" readonly value="@($"{Model.IssuerName} ({Model.IssuerId})")" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="ticket-user">Кто активировал</label>
+                            <input type="text" id="ticket-user" class="form-control" readonly value="@($"{Model.UserName} ({Model.UserId})")" />
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="ticket-used">Когда активировал</label>
+                            <input type="text" id="ticket-used" class="form-control" readonly value="@Model.UsingDate?.ToLocalTime().ToString("dd.MM.yyyy HH:mm:ss")" />
+                        </div>
+                        @if (Model.RecallDate == null && Model.UsingDate == null)
+                        {
+                            <form method="post">
+                                <input type="hidden" name="id" value="@Model.Id">
+                                <div class="input-group input-group-static mb-3">
+                                    <label class="ms-0" for="ticket-reason">Причина отзыва</label>
+                                    <input type="text" id="ticket-reason" name="reason" class="form-control" />
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-warning btn-icon"><i class="fas fa-ban"></i> Отозвать</button>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="input-group input-group-static mb-3">
+                                <label class="ms-0" for="ticket-recalled">Отозван</label>
+                                <input type="text" id="ticket-recalled" class="form-control" readonly value="@Model.RecallDate?.ToLocalTime().ToString("dd.MM.yyyy HH:mm:ss")" />
+                            </div>
+                            <div class="input-group input-group-static">
+                                <label class="ms-0" for="ticket-reason">Причина отзыва</label>
+                                <input type="text" id="ticket-reason" name="reason" class="form-control" readonly value="@Model.RecallReason" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

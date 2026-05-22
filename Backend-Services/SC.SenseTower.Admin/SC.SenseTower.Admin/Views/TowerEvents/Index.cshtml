@@ -1,0 +1,24 @@
+﻿@using SC.SenseTower.Admin.Cqrs.TowerEventsPage
+@using SC.SenseTower.Admin.Models.TowerEvents
+@model TowerEventsViewModel
+@{
+    ViewData["Title"] = "События";
+    var staticRootUrl = ViewBag.StaticRootUrl;
+}
+<div class="row">
+    <div class="col-12 mb-2">
+        <button class="btn btn-icon btn-3 btn-info" type="button" id="add-tower-event">
+            <span class="btn-inner--icon"><span class="material-icons">add_circle</span></span>
+            <span class="btn-inner--text">Создать событие</span>
+        </button>
+    </div>
+    <div class="col-12">
+        <div class="card" id="tower-events-grid">
+            <partial name="_Grid" model="Model" />
+        </div>
+    </div>
+</div>
+<partial name="_FilterPanel" model="Model.Filter" />
+@section Scripts {
+    <script src="@(staticRootUrl)js/pages/towerevents.js" asp-append-version="true"></script>
+}

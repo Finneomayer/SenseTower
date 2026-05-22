@@ -1,0 +1,113 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 0;
+}
+
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    height: calc(100vh - 130px);
+}
+
+.pl-0 {
+    padding-left: initial !important;
+}
+
+.gallery-info-image {
+    min-height: 150px;
+    min-width: 150px;
+    margin-right: 10px;
+}
+.gallery-info-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+.gallery-image-list {
+    max-height: 70vh;
+    overflow: auto;
+}
+.gallery-image-list-item:not(:last-child) {
+    border-bottom: 3px solid #E0E0E0;
+}
+.gallery-image-list-item .mover {
+    width: 16px;
+    height: 100%;
+}
+.gallery-image-list-item .mover:hover {
+    width: 16px;
+    height: 100%;
+    background-color: #eee;
+    cursor: grab;
+}
+.gallery-image-list-item .input-group .btn.input-group-text {
+    padding: 8px 16px;
+    top: 24px;
+    bottom: -14px;
+}
+.gallery-image-place {
+    min-height:32px;
+}
+
+.tower-event-image {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: contain;
+}
+.tower-event-tickets-list {
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.place-door-image {
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: contain;
+}
+.place-info-image {
+    min-height: 150px;
+    min-width: 150px;
+    margin-right: 10px;
+}
+.place-info-image img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+}
+.place-image-list {
+    max-height: 70vh;
+    overflow: auto;
+}
+.place-image-list-item:not(:last-child) {
+    border-bottom: 3px solid #E0E0E0;
+}
+.place-image-list-item .mover {
+    width: 16px;
+    height: 100%;
+}
+.place-image-list-item .mover:hover {
+    width: 16px;
+    height: 100%;
+    background-color: #eee;
+    cursor: grab;
+}
+.place-image-list-item .input-group .btn.input-group-text {
+    padding: 8px 16px;
+    top: 24px;
+    bottom: -14px;
+}
+.place-image-place {
+    min-height: 32px;
+}

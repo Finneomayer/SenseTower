@@ -1,0 +1,47 @@
+﻿using SC.SenseTower.Tickets.Dto.Spaces;
+
+namespace SC.SenseTower.Tickets.Dto.TowerEvents
+{
+    public class TowerEventDto
+    {
+        /// <summary>
+        /// Идентификатор события.
+        /// </summary>
+        public Guid Id { get; set; }
+
+        /// <summary>
+        /// Дата проведения события.
+        /// </summary>
+        public DateTimeOffset Date { get; set; }
+
+        /// <summary>
+        /// Дата и время начала события.
+        /// </summary>
+        public DateTimeOffset From { get; set; }
+
+        /// <summary>
+        /// Дата и время окончания события.
+        /// </summary>
+        public DateTimeOffset UpTo { get; set; }
+
+        /// <summary>
+        /// Название события.
+        /// </summary>
+        public string Title { get; set; } = null!;
+
+        /// <summary>
+        /// Описание события.
+        /// </summary>
+        public string Description { get; set; } = null!;
+
+        /// <summary>
+        /// Ссылка на афишу события.
+        /// </summary>
+        public string? ImageUrl { get; set; }
+
+        /// <summary>
+        /// Пространство, к которому привязано событие.
+        /// </summary>
+        public SpaceDto? Space { get; set; }
+    }
+}

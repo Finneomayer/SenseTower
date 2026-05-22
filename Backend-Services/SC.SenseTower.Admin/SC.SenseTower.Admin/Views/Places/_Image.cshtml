@@ -1,0 +1,41 @@
+﻿@using SC.SenseTower.Admin.Dto.Images
+@model ImageInfoDto
+@{
+    var images = (IList<SelectListItem>)ViewBag.Images;
+    var location = (int)ViewBag.ImageLocation;
+}
+<div class="row place-image-list-item" data-id="@Model.Id">
+    <div class="col-12 d-flex">
+        <div class="mover"></div>
+        <div class="place-info-image">
+            <img src="@Model.PreviewUrl" />
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group input-group-static">
+                    <label class="ms-0" for="Id@location">Изображение</label>
+                    <select class="form-control" id="Id@location" name="image-id">
+                    @foreach(var image in images)
+                    {
+                        if (image.Value == Model.Id.ToString())
+                        {
+                            <option value="@image.Value" selected>@image.Text</option>
+                        }
+                        else
+                        {
+                            <option value="@image.Value">@image.Text</option>
+                        }
+                    }
+                    </select>
+                    <button type="button" name="remove-image" class="btn btn-warning input-group-text" data-position="@location"><i class="fas fa-eraser"></i> Очистить</button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="input-group input-group-static">
+                    <label class="ms-0" asp-for="Name">Название</label>
+                    <input type="text" class="form-control" asp-for="Name" readonly />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

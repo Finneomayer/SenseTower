@@ -1,0 +1,25 @@
+﻿@using SC.SenseTower.Admin.Cqrs.GalleriesPage
+@using SC.SenseTower.Admin.Cqrs.TicketsPage
+@using SC.SenseTower.Admin.Models.Galleries
+@model GalleriesViewModel
+@{
+    ViewData["Title"] = "Билеты";
+    var staticRootUrl = ViewBag.StaticRootUrl;
+}
+<div class="row">
+    <div class="col-12 mb-2">
+        <button class="btn btn-icon btn-3 btn-info" type="button" id="add-gallery">
+            <span class="btn-inner--icon"><span class="material-icons">add_to_photos</span></span>
+            <span class="btn-inner--text">Создать галерею</span>
+        </button>
+    </div>
+    <div class="col-12">
+        <div class="card" id="galleries-grid">
+            <partial name="_Grid" model="Model" />
+        </div>
+    </div>
+</div>
+<partial name="_FilterPanel" model="new GalleriesPageFilter()" />
+@section Scripts {
+    <script src="@(staticRootUrl)js/pages/galleries.js" asp-append-version="true"></script>
+}

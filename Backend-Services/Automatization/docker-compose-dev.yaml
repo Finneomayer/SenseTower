@@ -1,0 +1,757 @@
+services:
+  reproxy:
+    image: umputun/reproxy:master
+    container_name: reproxy
+    hostname: reproxy
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOCKER_ENABLED=true
+      - LOGGER_ENABLED=true
+      - LOGGER_STDOUT=true      
+      - DOCKER_AUTO=true
+      - DEBUG=true
+      - MAX_SIZE=100M
+      - SSL_TYPE=auto
+      - SSL_ACME_FQDN=dev.sensetower.io
+      - HEADER=
+          X-Frame-Options:SAMEORIGIN,
+          X-XSS-Protection:1; mode=block;,
+          Content-Security-Policy:default-src 'self' *.sensetower.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://cdn.jsdelivr.net https://buttons.github.io https://cdnjs.cloudflare.com;
+  rabbit:
+    container_name: rabbit
+    image: "rabbitmq:management"
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "15671:15671"
+      - "15672:15672"
+      - "15691:15691"
+      - "15692:15692"
+      - "25672:25672"
+    restart: always
+    labels:
+      reproxy.enabled: no  
+  auth:
+    container_name: auth
+    hostname: auth
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.auth.dev:2022-11-15.0"
+    environment:
+      - PORT=7789
+      - MongoDbConfig__DatabaseName=Identity_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - IdentityServerSettings__UssuerUri=http://51.250.89.118:7789
+      - ServiceEndpointsSettings__AccountsRootUrl=http://51.250.89.118:7788/api/v1/accounts/
+      - MailerSettings__AddressFrom=noreply@sensetower.io
+      - MailerSettings__ApiKey=6n6zmha9qqbkgxfk478n7qrjfdgkue538ac1wmuy
+      - MailerSettings__ContactListId=1
+      - RabbitMQSettings__HostName=51.250.89.118
+      - RabbitMQSettings__Port=-1
+      - RabbitMQSettings__UserName=stagent
+      - RabbitMQSettings__Password=stagent
+    ports:
+      - "7789:7789"
+    restart: always
+    labels:
+      reproxy.route: '^/auth/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7789'
+  accounts:
+    container_name: accounts
+    hostname: accounts
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.accounts.dev:2022-11-24.0"
+    environment:
+      - PORT=7788
+      - MongoDbConfig__DatabaseName=Accounts_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - IdentityServerSettings__BaseUrl=http://51.250.89.118:7789/
+      - ServiceEndpointsSettings__MyPlacesRootUrl=http://51.250.89.118:7787/api/v1/myplaces/
+      - StaticRootUrl=/accounts/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7788:7788"
+    restart: always
+    labels:
+      reproxy.route: '^/accounts/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7788'
+  myplaces:
+    container_name: myplaces
+    hostname: myplaces
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.myplaces.dev:2022-11-17.2"
+    environment:
+      - PORT=7787
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=MyPlaces_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__AccountsRootUrl=http://51.250.89.118:7788/api/v1/accounts/
+      - ServiceEndpointsSettings__ImagesRootUrl=http://51.250.89.118:7781/api/v1/
+      - ServiceEndpointsSettings__SpacesRootUrl=http://51.250.89.118:7786/api/v1/
+      - ServiceEndpointsSettings__HallsRootUrl=http://51.250.89.118:7783/api/v1/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7787:7787"
+    restart: always
+    labels:
+      reproxy.route: '^/myplaces/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7787'
+  spaces:
+    container_name: spaces
+    hostname: spaces
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.spaces.test:2022-11-25.5"
+    environment:
+      - PORT=7786
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=Spaces_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__MyPlacesRootUrl=http://51.250.89.118:7787/api/v1/myplaces/
+      - ServiceEndpointsSettings__AccountsRootUrl=http://51.250.89.118:7788/api/v1/accounts/
+      - ServiceEndpointsSettings__ImagesRootUrl=http://51.250.89.118:7781/api/v1/
+      - SpaceServiceSettings__DefaultUnityServerIp=51.250.89.118
+      - SpaceServiceSettings__DefaultPort=7790
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7786:7786"
+    restart: always
+    labels:
+      reproxy.route: '^/spaces/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7786'
+  nft:
+    container_name: nft
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.nft.dev:2022-08-11.0"
+    environment:
+      - PORT=7785
+      - MongoDbConfig__DatabaseName=Nft_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ExternalUrlsSettings__SpaceUrl=https://dev.sensetower.io/nft
+    ports:
+      - "7785:7785"
+    restart: always
+    labels:
+      reproxy.route: '^/nft/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7785'
+  vr-discovery:
+    container_name: vr-discovery
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.vr-discovery.dev:2022-11-25.0"
+    environment:
+      - PORT=7784
+      - VREnvironmentInfo__GetTokenEndpoint=https://dev.sensetower.io/accounts/api/v1/accounts/identity/logon
+      - VREnvironmentInfo__RegistrationPageEndpoint=https://dev.sensetower.io/accounts/api/v1/accounts/identity/registeruser
+      - VREnvironmentInfo__ResetPasswordPageEndPoint=https://dev.sensetower.io/accounts/api/v1/accounts/identity/resetrequest
+      - VREnvironmentInfo__RefreshTokenPageEndPoint=https://dev.sensetower.io/accounts/api/v1/accounts/identity/refresh
+      - VREnvironmentInfo__GetMyPlacePageEndPoint=https://dev.sensetower.io/myplaces/api/v1/myplaces/user/places
+      - VREnvironmentInfo__GetMySpacePageEndPoint=https://dev.sensetower.io/spaces/api/v1/spaces/info/owned
+      - VREnvironmentInfo__GetImagePageEndPoint=https://dev.sensetower.io/images/api/v1/images/get
+      - VREnvironmentInfo__UpdateMyPlaceEndPoint=https://dev.sensetower.io/myplaces/api/v1/myplaces/user/update
+      - VREnvironmentInfo__SetAvatarEndPoint=https://dev.sensetower.io/accounts/api/v1/accounts/userinfo/setavatar
+      - VREnvironmentInfo__UsersInSpacesEndPoint=https://dev.sensetower.io/spaces/api/v1/states/users
+      - VREnvironmentInfo__GetSpacesUrlEndPoint=https://dev.sensetower.io/spaces/api/v1/Spaces
+      - VREnvironmentInfo__GetTowerEventsUrlEndPoint=https://dev.sensetower.io/towerevents/api/v1/towerevents
+      - VREnvironmentInfo__GetTowerNewsUrlEndPoint=https://dev.sensetower.io/news/api/v1/news
+      - VREnvironmentInfo__RegistrationInSpacesEndPoint=https://dev.sensetower.io/spaces/api/v1/states/registeruserinspace
+      - VREnvironmentInfo__GetHallsEndPoint=https://dev.sensetower.io/halls/api/v1/halls
+      - VREnvironmentInfo__GetGalleryEndPoint=https://dev.sensetower.io/galleries/api/v1/byspaceid
+      - VREnvironmentInfo__GetRemoteContentLocationEndPoint=https://sense-capital.github.io/RemoteContent/ServerData
+      - VREnvironmentInfo__ReplaceAllMyPlacePicturesUrl=https://dev.sensetower.io/myplaces/api/v1/myplaces/images/replaceall
+      - VREnvironmentInfo__GetMyPlaceBySpaceUrl=https://dev.sensetower.io/myplaces/api/v1/myplaces/user/placebyspace
+      - VREnvironmentInfo__GetMyPlaceUrl=https://dev.sensetower.io/myplaces/api/v1/myplaces/user/place
+      - VREnvironmentInfo__UpdateImageUrl=https://dev.sensetower.io/myplaces/api/v1/myplaces/user/updateimage
+      - VREnvironmentInfo__GetTicketsEndPoint=https://dev.sensetower.io/tickets/api/v1/tickets
+      - VREnvironmentInfo__GetCinemasEndPoint=https://dev.sensetower.io/cinemas/api/v1/cinemas
+      - VREnvironmentInfo__GetScreenSharingEndPoint=https://www.youtube.com/watch?v=Jz_FG2xngN4&ab_channel=SPACE
+      - VREnvironmentInfo__ReleaseVersion=2022-11-24.0
+      - VREnvironmentInfo__Bundle=28
+      - VREnvironmentInfo__MetricaAppKey=b2914d65-f80d-4eff-8669-9cc76aefeba9
+      - VREnvironmentInfo__GetWalletEndPoint=https://functions.yandexcloud.net/d4eob4k0anamamm5eg6n
+    ports:
+      - "7784:7784"
+    restart: always
+    labels:
+      reproxy.route: '^/vr-discovery/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7784'
+  halls:
+    container_name: halls
+    hostname: halls
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.halls.dev:2022-11-25.1"
+    environment:
+      - PORT=7783
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=Halls_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__MyPlacesRootUrl=http://51.250.89.118:7787/api/v1/myplaces/
+      - ServiceEndpointsSettings__SpacesRootUrl=http://51.250.89.118:7786/api/v1/
+      - ServiceEndpointsSettings__ImagesRootUrl=http://51.250.89.118:7781/api/v1/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7783:7783"
+    restart: always
+    labels:
+      reproxy.route: '^/halls/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7783'
+  admin:
+    container_name: admin
+    hostname: admin
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.admin.test:2022-11-17.2"
+    environment:
+      - PORT=7782
+      - StaticRootUrl=https://dev.sensetower.io/admin/
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - IdentityDbConfig__DatabaseName=Identity_dev
+      - IdentityDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - AccountsDbConfig__DatabaseName=Accounts_dev
+      - AccountsDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - PlacesDbConfig__DatabaseName=MyPlaces_dev
+      - PlacesDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__IS4RootUrl=http://51.250.89.118:7789/
+      - ServiceEndpointsSettings__AccountsRootUrl=http://51.250.89.118:7788/api/v1/accounts/
+      - ServiceEndpointsSettings__AccountsRegisterUrl=https://dev.sensetower.io/accounts/api/v1/accounts/identity/register?code="
+      - ServiceEndpointsSettings__ImagesRootUrl=https://dev.sensetower.io/images/api/v1/
+      - ServiceEndpointsSettings__GalleriesRootUrl=http://51.250.89.118:7778/api/v1/
+      - ServiceEndpointsSettings__SpacesRootUrl=http://51.250.89.118:7786/api/v1/
+      - ServiceEndpointsSettings__TowerEventsRootUrl=http://51.250.89.118:7779/api/v1/
+      - ServiceEndpointsSettings__TicketsRootUrl=http://51.250.89.118:7774/api/v1/
+      - ServiceEndpointsSettings__PlacesRootUrl=http://51.250.89.118:7787/api/v1/myplaces/
+    ports:
+      - "7782:7782"
+    restart: always
+    labels:
+      reproxy.route: '^/admin/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7782'
+  images:
+    container_name: images
+    hostname: images
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.images.dev:2022-11-17.0"
+    environment:
+      - PORT=7781
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - ImageSettings__Preview__Size=300
+      - ImageSettings__Preview__Resampler=Lanczos5
+      - ImageSettings__Original__Size=4500
+      - ImageSettings__Original__Weight=10485760
+      - ImageSettings__RootUrl=https://dev.sensetower.io/images/
+      - MongoDbConfig__DatabaseName=Images_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__MyPlacesRootUrl=http://51.250.89.118:7787/api/v1/myplaces/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7781:7781"
+    restart: always
+    labels:
+      reproxy.route: '^/images/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7781'
+  news:
+    container_name: news
+    hostname: news
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.news.dev:2022-09-08.2"
+    environment:
+      - PORT=7780
+    ports:
+      - "7780:7780"
+    restart: always
+    labels:
+      reproxy.route: '^/news/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7780'
+  towerevents:
+    container_name: towerevents
+    hostname: towerevents
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.towerevents.dev:2022-11-24.0"
+    environment:
+      - PORT=7779
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=TowerEvents_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__SpacesRootUrl=http://51.250.89.118:7786/api/v1/
+      - ServiceEndpointsSettings__ImagesRootUrl=http://51.250.89.118:7781/api/v1/images/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7779:7779"
+    restart: always
+    labels:
+      reproxy.route: '^/towerevents/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7779'
+  galleries:
+    container_name: galleries
+    hostname: galleries
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.galleries.dev:2022-11-24.0"
+    environment:
+      - PORT=7778
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=Galleries_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__ImagesRootUrl=http://51.250.89.118:7781/api/v1/
+      - ServiceEndpointsSettings__SpacesRootUrl=http://51.250.89.118:7786/api/v1/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7778:7778"
+    restart: always
+    labels:
+      reproxy.route: '^/galleries/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7778'
+  wallet:
+    container_name: wallet
+    hostname: wallet
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.wallet.dev:2022-09-27.4"
+    environment:
+      - PORT=7777
+    ports:
+      - "7777:7777"
+    restart: always
+    labels:
+      reproxy.route: '^/wallet/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7777'
+  cinemas:
+    container_name: cinemas
+    hostname: cinemas
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.cinemas.dev:2022-11-24.0"
+    environment:
+      - PORT=7776
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=Cinemas_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__AccountsRootUrl=http://51.250.89.118:7788/api/v1/accounts/
+      - ServiceEndpointsSettings__SpacesRootUrl=http://51.250.89.118:7786/api/v1/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7776:7776"
+    restart: always
+    labels:
+      reproxy.route: '^/cinemas/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7776'
+  client-web:
+    container_name: client-web
+    hostname: client-web
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.client.web:2022-11-18.2"
+    environment:
+      - PORT=7775
+      - VUE_APP_ST_API_URL=https://dev.sensetower.io/accounts
+    ports:
+      - "7775:7775"
+    restart: always
+    labels:
+      reproxy.route: '^/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7775'
+  tickets:
+    container_name: tickets
+    hostname: tickets
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.tickets.dev:2022-11-24.0"
+    environment:
+      - PORT=7774
+      - IS4Configuration__Authority=http://51.250.89.118:7789
+      - MongoDbConfig__DatabaseName=Tickets_dev
+      - MongoDbConfig__ConnectionString=mongodb://Sc_St_Identity0:M0ng0DB_!dentity@rc1a-fo1y2l2ou6jn2e7c.mdb.yandexcloud.net:27018/?tls=true&tlsInsecure=true
+      - ServiceEndpointsSettings__TowerEventsRootUrl=http://51.250.89.118:7779/api/v1/
+      - ServiceEndpointsSettings__AccountsRootUrl=http://51.250.89.118:7788/api/v1/accounts/
+      - RabbitMQConnectionSettings__HostName=51.250.89.118
+      - RabbitMQConnectionSettings__Port=-1
+      - RabbitMQConnectionSettings__UserName=stagent
+      - RabbitMQConnectionSettings__Password=stagent
+    ports:
+      - "7774:7774"
+    restart: always
+    labels:
+      reproxy.route: '^/tickets/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7774'
+  webrtc:
+    container_name: webrtc
+    hostname: webrtc
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.webrtc.dev:2022-11-14.0"
+    environment:
+      - PORT=7773
+    ports:
+      - "7773:7773"
+    restart: always
+    labels:
+      reproxy.route: '^/webrtc/(.*)'
+      reproxy.dest: '/@1'
+      reproxy.port: '7773'
+  hall:
+    container_name: hall
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.hall.dev:2022-11-25.0"
+    environment:
+      - Port=7790
+      - SPACE_ID=E81E71B9-E685-40C7-9D4E-49F9A328C1DB
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7790:7790/udp"    
+    restart: always
+    labels:
+      reproxy.enabled: no
+  lecture_hall:
+    container_name: lecture_hall
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.lecture-hall.dev:2022-11-25.0"
+    environment:
+      - Port=7791
+      - SPACE_ID=24B84AA8-909E-4D61-B942-4C2A63BA9AF9
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7791:7791/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no  
+  cinema:
+    container_name: cinema
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.cinema.dev:2022-11-25.0"
+    environment:
+      - Port=7792
+      - SPACE_ID=17585806-0BE3-4BB2-8F0E-0DFFF489843C
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7792:7792/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  standup:
+    container_name: standup
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.standup.dev:2022-11-25.0"
+    environment:
+      - Port=7793
+      - SPACE_ID=51AAAB1A-4F93-452D-95B2-B9B55F981F4C
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7793:7793/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  meeting:
+    container_name: meeting
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.meeting.dev:2022-11-25.0"
+    environment:
+      - Port=7794
+      - SPACE_ID=1AB3C0CD-3EAD-4D57-8374-D9C207F18941
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7794:7794/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  showroom:
+    container_name: showroom
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.showroom.dev:2022-11-25.0"
+    environment:
+      - Port=7795
+      - SPACE_ID=A3DB6E1F-4DA8-4FEB-8CA2-691137D32AF5
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7795:7795/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  art_gallery:
+    container_name: art_gallery
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.art-gallery.dev:2022-11-25.0"
+    environment:
+      - Port=7796
+      - SPACE_ID=BA7C8CDB-4CAE-4C60-8725-E494A6F997ED
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+    ports:
+      - "7796:7796/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace1:
+    container_name: myplace1
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.myplace.dev:2022-11-25.0"
+    environment:
+      - Port=7801
+      - SPACE_ID=423A299C-7E8A-46B3-B672-70DCC40E32EA
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+    ports:
+      - "7801:7801/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace4:
+    container_name: myplace4
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.myplace.dev:2022-11-25.0"
+    environment:
+      - Port=7804
+      - SPACE_ID=791AAF13-6692-493C-97FE-0BD4F4388BCF
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+    ports:
+      - "7804:7804/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace5:
+    container_name: myplace5
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.myplace.dev:2022-11-25.0"
+    environment:
+      - Port=7805
+      - SPACE_ID=466C4F30-6B7D-4155-878E-08F80E9B7305
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+    ports:
+      - "7805:7805/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace6:
+    container_name: myplace6
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.infrastructure.dev:2022-11-25.0"
+    environment:
+      - Port=7806
+      - SPACE_ID=466C4F30-6B7D-4155-878E-08F80E9B7306
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - RemoteFolderKey=Dynamicscenetest
+      - RemoteSceneKey=Dynamic scene test
+      - RemoteCatalogKey=catalog_Scene.json
+    ports:
+      - "7806:7806/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace7:
+    container_name: myplace7
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.infrastructure.dev:2022-11-25.0"
+    environment:
+      - Port=7807
+      - SPACE_ID=466c4f30-6b7d-4155-878e-08f80e9b7307
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - RemoteFolderKey=RemoteContentSample
+      - RemoteSceneKey=Anastasia_modeler
+      - RemoteCatalogKey=catalog_Remote anastasia scene.json
+    ports:
+      - "7807:7807/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace8:
+    container_name: myplace8
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.infrastructure.dev:2022-11-25.0"
+    environment:
+      - Port=7808
+      - SPACE_ID=466c4f30-6b7d-4155-878e-08f80e9b7308
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - RemoteFolderKey=BlueOffice
+      - RemoteSceneKey=OporaRussia_Mike
+      - RemoteCatalogKey=catalog_BlueOffice.json
+    ports:
+      - "7808:7808/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace30:
+    container_name: myplace30
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.new-gallery.dev:2022-11-25.0"
+    environment:
+      - Port=7830
+      - SPACE_ID=466C4F30-6B7D-4155-878E-08F80E9B7330
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+    ports:
+      - "7830:7830/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no
+  myplace32:
+    container_name: myplace32
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.infrastructure.dev:2022-11-25.0"
+    environment:
+      - Port=7832
+      - SPACE_ID=73e38519-1f50-43b5-a126-c5f160927a9b
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check      
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+      - RemoteFolderKey=RemoteContent
+      - RemoteSceneKey=Level
+      - RemoteCatalogKey=catalog_Sense.json
+    ports:
+      - "7832:7832/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no      
+  myplace43:
+    container_name: myplace43
+    image: "cr.yandex/crplei8g9hfd1jrmpva5/sc.st.server.new-gallery.dev:2022-11-25.0"
+    environment:
+      - Port=7843
+      - SPACE_ID=9FD08C9C-621C-4F36-BC73-6BEBEB7D6FF6
+      - ServerAuthUrl=http://10.128.0.14:7788/api/v1/accounts/identity/clientlogon
+      - PlaceUsersPostUrl=http://10.128.0.14:7786/api/v1/states/users
+      - PlaceUserCheckUrl=http://10.128.0.14:7786/api/v1/states/check
+      - CheckClientsTokenUrl=http://10.128.0.14:7788/api/v1/accounts/identity/check
+      - GetMyPlaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/place
+      - GetPlaceBySpaceUrl=http://10.128.0.14:7787/api/v1/myplaces/user/placebyspace
+      - GetUsersInSpaceUrl=http://10.128.0.14:7786/api/v1/states/usersinspace
+      - GetCinemaUrl=http://10.128.0.14:7776/api/v1/cinemas/byspace
+      - RemoteContent_Url=https://sense-capital.github.io/RemoteContent/ServerData
+      - GetTowerEventsUrl=http://10.128.0.14:7779/api/v1/towerevents
+    ports:
+      - "7843:7843/udp"
+    restart: always
+    labels:
+      reproxy.enabled: no

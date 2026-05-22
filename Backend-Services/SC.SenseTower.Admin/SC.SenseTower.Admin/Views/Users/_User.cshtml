@@ -1,0 +1,143 @@
+﻿@using SC.SenseTower.Admin.Dto.Users
+@model UserDetailsDto
+@{
+    var roles = Model.AvailableRoles.Select(r => new SelectListItem { Text = r.Name, Value = r.Id.ToString() }).ToList();
+    roles.Insert(0, new SelectListItem { Text = "[не выбрана]", Value = "" });
+}
+<div class="modal fade" style="z-index:10000;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-weight-normal">Просмотр пользователя</h5>
+                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="user-id">Пользователь</label>
+                            <input type="text" id="user-id" class="form-control" readonly value="@($"{Model.UserName} ({Model.Id})")" />
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group input-group-static mb-3">
+                                    <label class="ms-0" for="user-created-at">Зарегистрирован</label>
+                                    <input type="text" id="user-created-at" class="form-control" readonly value="@Model.CreatedAt?.ToString("dd.MM.yyyy HH:mm")" />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group input-group-static mb-3">
+                                    <label class="ms-0" for="user-is-locked">Состояние</label>
+                                    <input type="text" id="user-is-locked" class="form-control" readonly value="@((Model.LockoutEnd ?? DateTime.MinValue) < DateTime.UtcNow ? "Активен" : "Заблокирован")" />
+                                    @if (Model.LockoutEnd == DateTime.MaxValue)
+                                    {
+                                        <span class="input-group-text">
+                                            <i class="fas fa-user-slash text-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Бессрочно" data-container="body" data-animation="true"></i>
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="user-email">Email</label>
+                            <input type="text" id="user-email" class="form-control" readonly value="@Model.Email" />
+                            <span class="input-group-text">
+                                <i class="fas @(Model.EmailConfirmed ? "fa-check text-success" : "fa-exclamation text-danger")" data-bs-toggle="tooltip" data-bs-placement="top" title="Email @(Model.EmailConfirmed ? "" : "не ")подтвержден" data-container="body" data-animation="true"></i>
+                            </span>
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" asp-for="RoleId">Роль</label>
+                            <select asp-for="RoleId" asp-items="roles" class="form-control"></select>
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="user-wallets">Кошельки</label>
+                            <div class="form-control table-responsive" style="max-height:6rem;overflow:auto">
+                                <table class="table table-sm align-items-center mb-0">
+                                    <tbody>
+                                        @if (Model.Wallets.Length == 0)
+                                        {
+                                            <tr>
+                                                <td class="text-center">Нет кошельков</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            foreach(var item in Model.Wallets)
+                                            {
+                                                <tr>
+                                                    <td>@item.Id</td>
+                                                    <td>@item.Name</td>
+                                                    <td class="text-center">
+                                                        @if (item.IsConfirmed)
+                                                        {
+                                                            <i class="fas fa-check" title="Подтвержден"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fas fa-exclamation text-warning" title="Не подтвержден"></i>
+                                                        }
+                                                    </td>
+                                                    <td class="text-center">
+                                                        @if (item.IsActive)
+                                                        {
+                                                            <i class="fas fa-check" title="Активен"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fas fa-exclamation text-warning" title="Не активен"></i>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="user-wallets">Помещения</label>
+                            <div class="form-control table-responsive" style="max-height:10.1rem;min-height:10.1rem;overflow:auto">
+                                <table class="table table-sm align-items-center mb-0">
+                                    <tbody>
+                                        @foreach(var item in Model.Places)
+                                        {
+                                            <tr data-id="@item.Id">
+                                                <td>@item.Name</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="input-group input-group-static mb-3">
+                            <label class="ms-0" for="user-wallets">Приглашения</label>
+                            <div class="form-control table-responsive" style="max-height:10.1rem;min-height:10.1rem;overflow:auto">
+                                <table class="table table-sm align-items-center mb-0">
+                                    <tbody>
+                                        @foreach(var item in Model.Invites)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.UserName</td>
+                                                <td class="text-center">
+                                                    @if (item.IsRecalled)
+                                                    {
+                                                        <i class="fas fa-ban text-danger" title="Отозвано"></i>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
